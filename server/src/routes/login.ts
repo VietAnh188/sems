@@ -7,7 +7,7 @@ const router = express.Router();
 
 const accountRepository = AppDataSource.getRepository(Account);
 
-router.get('/api/login', async (req: Request, res: Response) => {
+router.post('/api/auth/login', async (req: Request, res: Response) => {
     try {
         const account: Account | null = await accountRepository.findOneBy({
             username: req.body.username,

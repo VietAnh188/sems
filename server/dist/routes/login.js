@@ -22,7 +22,7 @@ const Account_1 = require("../entities/Account");
 const router = express_1.default.Router();
 exports.LoginRouter = router;
 const accountRepository = data_source_1.AppDataSource.getRepository(Account_1.Account);
-router.get('/api/login', async (req, res) => {
+router.post('/api/auth/login', async (req, res) => {
     try {
         const account = await accountRepository.findOneBy({
             username: req.body.username,

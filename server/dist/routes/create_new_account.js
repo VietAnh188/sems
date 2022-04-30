@@ -11,7 +11,7 @@ const Account_1 = require("../entities/Account");
 const router = express_1.default.Router();
 exports.RegisterRouter = router;
 const accountRepository = data_source_1.AppDataSource.getRepository(Account_1.Account);
-router.post('/api/register', async (req, res) => {
+router.post('/api/auth/register', async (req, res) => {
     try {
         const existUsername = await accountRepository.findOneBy({
             username: req.body.username,
