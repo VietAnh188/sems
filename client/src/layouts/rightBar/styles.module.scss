@@ -1,0 +1,20 @@
+.rightbar {
+    width: 100%;
+    border-radius: var(--primary-border-radius);
+    height: calc(100vh - var(--navbar-height) - 40px);
+    box-shadow: var(--primary-shadow);
+
+    &_wrapper {
+        padding: 20px;
+        height: calc(100% - 40px);
+
+        .icon {
+            font-size: 20px;
+
+            &:hover {
+                cursor: pointer;
+                color: var(--secondary-color);
+            }
+        }
+    }
+}

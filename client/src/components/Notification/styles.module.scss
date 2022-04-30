@@ -1,0 +1,34 @@
+.notification {
+    box-shadow: var(--primary-shadow);
+    border-radius: var(--primary-border-radius);
+    width: 100%;
+    margin-bottom: 20px;
+    transition: all 0.25s linear;
+
+    &_wrapper {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+
+        &_icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            padding: 5px;
+            border-radius: var(--primary-border-radius);
+            margin-right: 10px;
+        }
+
+        &_content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+    }
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+    }
+}

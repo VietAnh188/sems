@@ -1,0 +1,28 @@
+.search {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & input {
+        width: 100%;
+        padding: 5px 0 5px 15px;
+        border-radius: var(--primary-border-radius);
+        border: 1px solid;
+
+        &:focus {
+            outline-color: var(--secondary-color);
+
+            & ~ .icon {
+                color: var(--secondary-color);
+            }
+        }
+    }
+
+    & .icon {
+        position: absolute;
+        right: 2%;
+        font-size: 120%;
+    }
+}

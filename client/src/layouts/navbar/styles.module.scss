@@ -1,0 +1,28 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--navbar-height);
+    box-shadow: var(--primary-shadow);
+    background-color: #fff;
+
+    &_wrapper {
+        position: relative;
+        display: flex;
+        margin: auto;
+        height: 100%;
+        width: 95%;
+
+        & > div {
+            .logo {
+                height: 100%;
+                width: var(--navbar-height);
+            }
+
+            .search {
+                width: 50%;
+            }
+        }
+    }
+}
