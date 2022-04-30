@@ -17,14 +17,14 @@ router.post('/api/auth/register', async (req, res) => {
             username: req.body.username,
         });
         if (existUsername)
-            return res.status(400).send('Username already exists');
+            return res.status(400).json({ message: 'Username already exists' });
         const existEmail = await accountRepository.findOneBy({
             email: req.body.email,
         });
         const hashedPassword = await argon2_1.default.hash(req.body.password);
         if (existEmail)
-            return res.status(400).json('Email already exists');
-        const newAccount = await accountRepository.create(Object.assign(Object.assign({}, req.body), { password: hashedPassword }));
+            return res.status(400).json({ message: 'Email already exists' });
+        const newAccount = accountRepository.create(Object.assign(Object.assign({}, req.body), { password: hashedPassword }));
         await accountRepository.save(newAccount);
         return res.status(200).json(newAccount);
     }

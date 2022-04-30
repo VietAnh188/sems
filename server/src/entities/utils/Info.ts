@@ -24,10 +24,10 @@ export class Info extends BaseEntity {
     id: string;
 
     @Column()
-    firstName: string;
+    first_name: string;
 
     @Column()
-    lastName: string;
+    last_name: string;
 
     @Column({
         type: 'date',
@@ -53,6 +53,7 @@ export class Info extends BaseEntity {
 
     @Column({
         type: 'int',
+        default: 0,
     })
     vacation: number;
 

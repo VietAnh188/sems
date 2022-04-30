@@ -28,13 +28,13 @@ router.post('/api/auth/login', async (req, res) => {
             username: req.body.username,
         });
         if (!account)
-            return res.status(400).send('Username does not exist');
+            return res.status(400).json({ message: 'Username does not exist' });
         if (await argon2_1.default.verify(account.password, req.body.password)) {
             const { password } = account, remain = __rest(account, ["password"]);
             return res.status(200).json(Object.assign({}, remain));
         }
         else {
-            return res.status(400).send('Password is incorrect');
+            return res.status(400).json({ message: 'Password is incorrect' });
         }
     }
     catch (error) {

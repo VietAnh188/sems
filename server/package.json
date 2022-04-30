@@ -1,6 +1,13 @@
 {
     "name": "server",
     "version": "1.0.0",
+    "author": {
+        "name": "Viet Anh Le",
+        "email": "anhkun123456@gmail.com",
+        "facebook": "https://www.facebook.com/profile.php?id=100009701613657",
+        "linkedIn": "https://www.linkedin.com/in/viet-anh-le-033b29227/",
+        "github": "https://github.com/VietAnh188"
+    },
     "main": "index.js",
     "license": "MIT",
     "dependencies": {

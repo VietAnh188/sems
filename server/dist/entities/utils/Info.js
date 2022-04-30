@@ -31,11 +31,11 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Info.prototype, "firstName", void 0);
+], Info.prototype, "first_name", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Info.prototype, "lastName", void 0);
+], Info.prototype, "last_name", void 0);
 __decorate([
     (0, typeorm_1.Column)({
         type: 'date',
@@ -65,6 +65,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({
         type: 'int',
+        default: 0,
     }),
     __metadata("design:type", Number)
 ], Info.prototype, "vacation", void 0);

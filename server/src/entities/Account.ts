@@ -25,7 +25,9 @@ export class Account extends BaseEntity {
     })
     email: string;
 
-    @Column()
+    @Column({
+        unique: true,
+    })
     password: string;
 
     @CreateDateColumn({

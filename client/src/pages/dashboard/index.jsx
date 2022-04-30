@@ -4,6 +4,7 @@ import styles from './styles.module.scss';
 import SalaryChart from '../../components/SalaryChart';
 import BenefitChart from '../../components/BenefitChart';
 import GenderChart from '../../components/GenderChart';
+import EthnicityChart from '../../components/EthnicityChart';
 
 const Row = styled.div`
     display: flex;
@@ -40,7 +41,9 @@ const Dashboard = () => {
                 </One>
             </Row>
             <Row className={styles.margin_bottom}>
-                <One className={styles.box}>4</One>
+                <One className={styles.box}>
+                    <EthnicityChart />
+                </One>
             </Row>
             <Row className={styles.margin_bottom}>
                 <One className={styles.box}>5</One>

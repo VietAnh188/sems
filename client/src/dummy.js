@@ -92,3 +92,42 @@ export const gender = [
         other: 100,
     },
 ];
+
+export const ethnicity = [
+    {
+        name: 'Kinh',
+        total: 10000,
+    },
+    {
+        name: 'Tay',
+        total: 1000,
+    },
+    {
+        name: 'Thai',
+        total: 100,
+    },
+    {
+        name: 'Nung',
+        total: 2000,
+    },
+    {
+        name: 'Hmong',
+        total: 1500,
+    },
+    {
+        name: 'Dao',
+        total: 900,
+    },
+    {
+        name: 'Bana',
+        total: 800,
+    },
+    {
+        name: 'Cham',
+        total: 100,
+    },
+    {
+        name: 'Bru-Van Kieu',
+        total: 1000,
+    },
+];

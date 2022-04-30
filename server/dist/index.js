@@ -9,8 +9,9 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const path_1 = __importDefault(require("path"));
 const data_source_1 = require("./data-source");
-const create_new_account_1 = require("./routes/create_new_account");
-const login_1 = require("./routes/login");
+const authRoute_1 = require("./routes/authRoute");
+const roleRoute_1 = require("./routes/roleRoute");
+const personRoute_1 = require("./routes/personRoute");
 data_source_1.AppDataSource.initialize()
     .then(() => {
     const app = (0, express_1.default)();
@@ -20,8 +21,9 @@ data_source_1.AppDataSource.initialize()
     app.use('/images', express_1.default.static(path_1.default.join(__dirname, 'default/images')));
     app.use(express_1.default.json());
     app.use((0, cors_1.default)());
-    app.use(create_new_account_1.RegisterRouter);
-    app.use(login_1.LoginRouter);
+    app.use('/api/auth', authRoute_1.AuthRouter);
+    app.use('/api/role', roleRoute_1.RoleRouter);
+    app.use('/api/person', personRoute_1.PersonRouter);
     const port = process.env.PORT || 1808;
     app.listen(port, () => {
         console.log(`Listening on port ${port}`);

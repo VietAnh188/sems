@@ -1,0 +1,63 @@
+import { Request, Response } from 'express';
+import argon2 from 'argon2';
+import { AppDataSource } from '../data-source';
+import { Account } from '../entities/Account';
+
+const accountRepository = AppDataSource.getRepository(Account);
+
+export const authControllers = {
+    login: async (req: Request, res: Response) => {
+        try {
+            const account: Account | null = await accountRepository.findOneBy({
+                username: req.body.username,
+            });
+            if (!account)
+                return res
+                    .status(400)
+                    .json({ message: 'Username does not exist' });
+            if (await argon2.verify(account.password, req.body.password)) {
+                const { password, ...remain } = account;
+                return res.status(200).json({ ...remain });
+            } else {
+                return res
+                    .status(400)
+                    .json({ message: 'Password is incorrect' });
+            }
+        } catch (error) {
+            return res.status(500).json({
+                message: error,
+            });
+        }
+    },
+    register: async (req: Request, res: Response) => {
+        try {
+            const existUsername: Account | null =
+                await accountRepository.findOneBy({
+                    username: req.body.username,
+                });
+            if (existUsername)
+                return res
+                    .status(400)
+                    .json({ message: 'Username already exists' });
+            const existEmail: Account | null =
+                await accountRepository.findOneBy({
+                    email: req.body.email,
+                });
+            const hashedPassword = await argon2.hash(req.body.password);
+            if (existEmail)
+                return res
+                    .status(400)
+                    .json({ message: 'Email already exists' });
+            const newAccount: Account[] = accountRepository.create({
+                ...req.body,
+                password: hashedPassword,
+            });
+            await accountRepository.save(newAccount);
+            return res.status(200).json(newAccount);
+        } catch (error) {
+            return res.status(500).json({
+                message: error,
+            });
+        }
+    },
+};

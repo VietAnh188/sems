@@ -4,8 +4,9 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import { AppDataSource } from './data-source';
-import { RegisterRouter } from './routes/create_new_account';
-import { LoginRouter } from './routes/login';
+import { AuthRouter } from './routes/authRoute';
+import { RoleRouter } from './routes/roleRoute';
+import { PersonRouter } from './routes/personRoute';
 
 AppDataSource.initialize()
     .then(() => {
@@ -23,8 +24,9 @@ AppDataSource.initialize()
         app.use(express.json());
         app.use(cors());
 
-        app.use(RegisterRouter);
-        app.use(LoginRouter);
+        app.use('/api/auth', AuthRouter);
+        app.use('/api/role', RoleRouter);
+        app.use('/api/person', PersonRouter);
 
         const port = process.env.PORT || 1808;
 
