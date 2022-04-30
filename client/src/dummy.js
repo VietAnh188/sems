@@ -60,3 +60,35 @@ export const salary = [
         2022: 8000,
     },
 ];
+
+export const benefit = [
+    {
+        name: 'Shareholder',
+        value: 400,
+    },
+    {
+        name: 'Non-Shareholder',
+        value: 300,
+    },
+];
+
+export const gender = [
+    {
+        name: 'Human Resource',
+        male: 500,
+        female: 2000,
+        other: 10,
+    },
+    {
+        name: 'Adminstration',
+        male: 3000,
+        female: 2000,
+        other: 100,
+    },
+    {
+        name: 'Development',
+        male: 5000,
+        female: 1000,
+        other: 100,
+    },
+];

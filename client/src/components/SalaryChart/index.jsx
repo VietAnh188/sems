@@ -10,26 +10,16 @@ import {
     Tooltip,
     Area,
 } from 'recharts';
-
-const Wrapper = styled.div`
-    width: 100%;
-    height: 100%;
-    padding: 10px;
-`;
-
-const Title = styled.span`
-    font-size: 20px;
-    font-weight: bold;
-`;
+import { Wrapper, Title } from '../../StyledComponents';
 
 const SalaryChart = () => {
     return (
         <Wrapper>
             <Title>Salary</Title>
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height={200}>
                 <AreaChart
                     data={salary}
-                    margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                    margin={{ top: 10, right: 20, left: 0, bottom: 0 }}
                 >
                     <defs>
                         <linearGradient

@@ -1,8 +1,10 @@
-import React, { useId } from 'react';
+import React, { useId, useRef } from 'react';
 import styled from 'styled-components';
 import styles from './styles.module.scss';
 import Button from '../../components/Button';
 import Logo from '../../components/Logo';
+import { useDispatch } from 'react-redux';
+import { loginCall } from '../../redux/features/auth';
 
 const Title = styled.h1`
     font-size: 30px;
@@ -12,6 +14,22 @@ const Title = styled.h1`
 
 const Login = () => {
     const id = useId();
+
+    const username = useRef();
+    const password = useRef();
+
+    const dispatch = useDispatch();
+
+    const handleLogin = event => {
+        event.preventDefault();
+        if (username.current.value && password.current.value) {
+            const request = {
+                username: username.current.value,
+                password: password.current.value,
+            };
+            dispatch(loginCall(request));
+        }
+    };
 
     return (
         <div className={styles.login}>
@@ -25,15 +43,18 @@ const Login = () => {
                                 id={id + '-username'}
                                 type="text"
                                 placeholder="Enter your username"
+                                ref={username}
                             />
                             <label htmlFor={id + '-password'}>Password</label>
                             <input
                                 id={id + '-password'}
                                 type="password"
                                 placeholder="Enter your password"
+                                ref={password}
                             />
                         </form>
                         <div
+                            onClick={handleLogin}
                             style={{
                                 width: '100%',
                                 display: 'flex',

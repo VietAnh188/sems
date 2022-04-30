@@ -20,9 +20,11 @@ const AppBody = styled.div`
 
 const AppBodyContent = styled.div`
     width: 100%;
-    height: 100%;
+    height: calc(100vh - var(--navbar-height) - 40px);
     border-radius: var(--primary-border-radius);
     box-shadow: var(--primary-shadow);
+    overflow-y: scroll;
+    scroll-behavior: smooth;
 `;
 
 const Main = () => {

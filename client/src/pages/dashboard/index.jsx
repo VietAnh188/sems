@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import styles from './styles.module.scss';
 import SalaryChart from '../../components/SalaryChart';
+import BenefitChart from '../../components/BenefitChart';
+import GenderChart from '../../components/GenderChart';
 
 const Row = styled.div`
     display: flex;
@@ -20,15 +22,22 @@ const Dashboard = () => {
     return (
         <>
             <Row className={styles.margin_bottom}>
-                <Two style={{ marginRight: '10px' }} className={styles.box}>
+                <Two
+                    style={{
+                        marginRight: '10px',
+                    }}
+                    className={styles.box}
+                >
                     <SalaryChart />
                 </Two>
                 <One style={{ marginLeft: '10px' }} className={styles.box}>
-                    1
+                    <BenefitChart />
                 </One>
             </Row>
             <Row className={styles.margin_bottom}>
-                <One className={styles.box}>3</One>
+                <One className={styles.box}>
+                    <GenderChart />
+                </One>
             </Row>
             <Row className={styles.margin_bottom}>
                 <One className={styles.box}>4</One>

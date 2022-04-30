@@ -1,7 +1,21 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { authSelector } from './redux/features/auth';
 
 function App() {
+    const { user } = useSelector(authSelector);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!user) {
+            navigate('/login');
+        } else {
+            navigate('/main');
+        }
+    }, [user?.id]);
+
     return (
         <>
             <Outlet />
