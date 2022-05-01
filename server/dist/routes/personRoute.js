@@ -9,5 +9,8 @@ const personControllers_1 = require("../controllers/personControllers");
 const router = express_1.default.Router();
 exports.PersonRouter = router;
 router.post('/', personControllers_1.personControllers.createNewPerson);
-router.put('/:personId/connect/:accountId', personControllers_1.personControllers.connectToAccount);
+router.put('/:personId/account/:accountId', personControllers_1.personControllers.connectToAccount);
+router.put('/:personId/department/:departmentId', personControllers_1.personControllers.connectToDepartment);
+router.put('/:personId/ethnicity/:ethnicityId', personControllers_1.personControllers.connectToEthnicity);
+router.put('/:personId/role/:roleId', personControllers_1.personControllers.connectToRoles);
 //# sourceMappingURL=personRoute.js.map

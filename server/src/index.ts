@@ -7,6 +7,7 @@ import { AppDataSource } from './data-source';
 import { AuthRouter } from './routes/authRoute';
 import { RoleRouter } from './routes/roleRoute';
 import { PersonRouter } from './routes/personRoute';
+import { DepartmentRouter } from './routes/departmentRoute';
 
 AppDataSource.initialize()
     .then(() => {
@@ -27,6 +28,7 @@ AppDataSource.initialize()
         app.use('/api/auth', AuthRouter);
         app.use('/api/role', RoleRouter);
         app.use('/api/person', PersonRouter);
+        app.use('/api/department', DepartmentRouter);
 
         const port = process.env.PORT || 1808;
 
