@@ -1,15 +1,25 @@
 import { Request, Response } from 'express';
 import { AppDataSource } from '../data-source';
 import { Department } from '../entities/Department';
+import { Person } from '../entities/Person';
+import { groupBy } from '../functions/groupBy';
 
 const departmentRepository = AppDataSource.getRepository(Department);
+
+interface IGenderResult {
+    name: string;
+    male: Person[];
+    female: Person[];
+    other: Person[];
+}
 
 export const departmentControllers = {
     createNewDepartment: async (req: Request, res: Response) => {
         try {
-            const existingDepartment = await departmentRepository.findOneBy({
-                name: req.body.name,
-            });
+            const existingDepartment: Department | null =
+                await departmentRepository.findOneBy({
+                    name: req.body.name,
+                });
             if (existingDepartment)
                 return res.status(400).json({
                     message: 'Department already exists',
@@ -53,13 +63,19 @@ export const departmentControllers = {
     },
     getAllPersons: async (req: Request, res: Response) => {
         try {
-            const persons = await departmentRepository
+            const department: Department | null = await departmentRepository
                 .createQueryBuilder('department')
                 .leftJoinAndSelect('department.persons', 'person')
                 .where('department.id = :departmentId', {
                     departmentId: req.params.id,
                 })
-                .getMany();
+                .getOne();
+            if (!department) {
+                return res.status(404).json({
+                    message: 'Department not found',
+                });
+            }
+            const { persons } = department;
             return res.status(200).json(persons);
         } catch (error) {
             return res.status(500).json({
@@ -69,8 +85,8 @@ export const departmentControllers = {
     },
     getAllAndGroupGenderPerson: async (_req: Request, res: Response) => {
         try {
-            const result = [];
-            const departments = await departmentRepository.find();
+            const result: Department[] = [];
+            const departments: Department[] = await departmentRepository.find();
             for (const department of departments) {
                 const departments: Department[] = await departmentRepository
                     .createQueryBuilder('department')
@@ -81,7 +97,21 @@ export const departmentControllers = {
                     .getMany();
                 result.push(...departments);
             }
-            return res.status(200).json(result);
+
+            const finalResult: IGenderResult[] = result.map(
+                (department: Department): IGenderResult => {
+                    const { persons } = department;
+                    const groupedByGender = groupBy(
+                        persons,
+                        (person: Person) => person.gender
+                    );
+                    return {
+                        name: department.name,
+                        ...groupedByGender,
+                    };
+                }
+            );
+            return res.status(200).json(finalResult);
         } catch (error) {
             return res.status(500).json({
                 message: error,

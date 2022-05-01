@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.departmentControllers = void 0;
 const data_source_1 = require("../data-source");
 const Department_1 = require("../entities/Department");
+const groupBy_1 = require("../functions/groupBy");
 const departmentRepository = data_source_1.AppDataSource.getRepository(Department_1.Department);
 exports.departmentControllers = {
     createNewDepartment: async (req, res) => {
@@ -54,13 +55,19 @@ exports.departmentControllers = {
     },
     getAllPersons: async (req, res) => {
         try {
-            const persons = await departmentRepository
+            const department = await departmentRepository
                 .createQueryBuilder('department')
                 .leftJoinAndSelect('department.persons', 'person')
                 .where('department.id = :departmentId', {
                 departmentId: req.params.id,
             })
-                .getMany();
+                .getOne();
+            if (!department) {
+                return res.status(404).json({
+                    message: 'Department not found',
+                });
+            }
+            const { persons } = department;
             return res.status(200).json(persons);
         }
         catch (error) {
@@ -83,7 +90,12 @@ exports.departmentControllers = {
                     .getMany();
                 result.push(...departments);
             }
-            return res.status(200).json(result);
+            const finalResult = result.map((department) => {
+                const { persons } = department;
+                const groupedByGender = (0, groupBy_1.groupBy)(persons, (person) => person.gender);
+                return Object.assign({ name: department.name }, groupedByGender);
+            });
+            return res.status(200).json(finalResult);
         }
         catch (error) {
             return res.status(500).json({
