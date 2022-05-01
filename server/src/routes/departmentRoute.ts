@@ -10,6 +10,8 @@ router.get(
     '/getallgroupgender',
     departmentControllers.getAllAndGroupGenderPerson
 );
-router.get('/:id', departmentControllers.getAllPersons);
+router.get('/:id/persons', departmentControllers.getAllPersons);
+router.get('/:id', departmentControllers.getOneDepartment);
+router.get('/', departmentControllers.getAllDepartment);
 
 export { router as DepartmentRouter };

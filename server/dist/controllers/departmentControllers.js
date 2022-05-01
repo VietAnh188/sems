@@ -53,6 +53,33 @@ exports.departmentControllers = {
             });
         }
     },
+    getOneDepartment: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const department = await departmentRepository.findOneBy({ id });
+            if (!department)
+                return res
+                    .status(404)
+                    .json({ message: 'Department not found' });
+            return res.status(200).json(department);
+        }
+        catch (error) {
+            return res.status(500).json({
+                message: error,
+            });
+        }
+    },
+    getAllDepartment: async (_req, res) => {
+        try {
+            const departments = await departmentRepository.find();
+            return res.status(200).json(departments);
+        }
+        catch (error) {
+            return res.status(500).json({
+                message: error,
+            });
+        }
+    },
     getAllPersons: async (req, res) => {
         try {
             const department = await departmentRepository

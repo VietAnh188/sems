@@ -61,6 +61,19 @@ export const personControllers = {
             });
         }
     },
+    updatePerson: async (req: Request, res: Response) => {
+        try {
+            const { id } = req.params;
+            await personRepository.update(id, req.body);
+            return res.status(200).json({
+                message: 'Update success',
+            });
+        } catch (error) {
+            return res.status(500).json({
+                message: error,
+            });
+        }
+    },
     connectToAccount: async (req: Request, res: Response) => {
         try {
             const { personId, accountId } = req.params;
