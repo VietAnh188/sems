@@ -140,5 +140,44 @@ exports.personControllers = {
             });
         }
     },
+    getOnePerson: async (req, res) => {
+        try {
+            const person = await personRepository
+                .createQueryBuilder('person')
+                .where('person.id = :id', { id: req.params.id })
+                .getOne();
+            if (!person)
+                return res.status(404).json({ message: 'Person not found' });
+            return res.status(200).json(person);
+        }
+        catch (error) {
+            return res.status(500).json({
+                message: error,
+            });
+        }
+    },
+    getAllPersons: async (_req, res) => {
+        try {
+            const persons = await personRepository.find();
+            return res.status(200).json(persons);
+        }
+        catch (error) {
+            return res.status(500).json({ message: error });
+        }
+    },
+    getSomePersons: async (req, res) => {
+        try {
+            const { q } = req.query;
+            const persons = await personRepository
+                .createQueryBuilder('person')
+                .where('person.first_name LIKE :q', { q: `%${q}%` })
+                .orWhere('person.last_name LIKE :q', { q: `%${q}%` })
+                .getMany();
+            return res.status(200).json(persons);
+        }
+        catch (error) {
+            return res.status(500).json({ message: error });
+        }
+    },
 };
 //# sourceMappingURL=personControllers.js.map

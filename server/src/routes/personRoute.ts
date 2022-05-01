@@ -14,5 +14,8 @@ router.put(
     personControllers.connectToEthnicity
 );
 router.put('/:personId/role/:roleId', personControllers.connectToRoles);
+router.get('/search', personControllers.getSomePersons);
+router.get('/:id', personControllers.getOnePerson);
+router.get('/', personControllers.getAllPersons);
 
 export { router as PersonRouter };

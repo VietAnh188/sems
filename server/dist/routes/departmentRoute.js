@@ -11,4 +11,6 @@ exports.DepartmentRouter = router;
 router.post('/', departmentControllers_1.departmentControllers.createNewDepartment);
 router.put('/:id', departmentControllers_1.departmentControllers.updateDepartment);
 router.delete('/:id', departmentControllers_1.departmentControllers.deleteDepartment);
+router.get('/getallgroupgender', departmentControllers_1.departmentControllers.getAllAndGroupGenderPerson);
+router.get('/:id', departmentControllers_1.departmentControllers.getAllPersons);
 //# sourceMappingURL=departmentRoute.js.map

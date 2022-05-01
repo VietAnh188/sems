@@ -51,4 +51,41 @@ export const departmentControllers = {
             });
         }
     },
+    getAllPersons: async (req: Request, res: Response) => {
+        try {
+            const persons = await departmentRepository
+                .createQueryBuilder('department')
+                .leftJoinAndSelect('department.persons', 'person')
+                .where('department.id = :departmentId', {
+                    departmentId: req.params.id,
+                })
+                .getMany();
+            return res.status(200).json(persons);
+        } catch (error) {
+            return res.status(500).json({
+                message: error,
+            });
+        }
+    },
+    getAllAndGroupGenderPerson: async (_req: Request, res: Response) => {
+        try {
+            const result = [];
+            const departments = await departmentRepository.find();
+            for (const department of departments) {
+                const departments: Department[] = await departmentRepository
+                    .createQueryBuilder('department')
+                    .leftJoinAndSelect('department.persons', 'person')
+                    .where('department.id = :departmentId', {
+                        departmentId: department.id,
+                    })
+                    .getMany();
+                result.push(...departments);
+            }
+            return res.status(200).json(result);
+        } catch (error) {
+            return res.status(500).json({
+                message: error,
+            });
+        }
+    },
 };
