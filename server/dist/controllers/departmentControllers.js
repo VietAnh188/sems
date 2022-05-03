@@ -1,22 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.departmentControllers = void 0;
-const data_source_1 = require("../data-source");
-const Department_1 = require("../entities/Department");
 const groupBy_1 = require("../functions/groupBy");
-const departmentRepository = data_source_1.AppDataSource.getRepository(Department_1.Department);
+const repositories_1 = require("../repositories");
 exports.departmentControllers = {
     createNewDepartment: async (req, res) => {
         try {
-            const existingDepartment = await departmentRepository.findOneBy({
+            const existingDepartment = await repositories_1.departmentRepository.findOneBy({
                 name: req.body.name,
             });
             if (existingDepartment)
                 return res.status(400).json({
                     message: 'Department already exists',
                 });
-            const department = departmentRepository.create(req.body);
-            await departmentRepository.save(department);
+            const department = repositories_1.departmentRepository.create(req.body);
+            await repositories_1.departmentRepository.save(department);
             return res.status(200).json(department);
         }
         catch (error) {
@@ -28,7 +26,7 @@ exports.departmentControllers = {
     updateDepartment: async (req, res) => {
         try {
             const { id } = req.params;
-            await departmentRepository.update(id, req.body);
+            await repositories_1.departmentRepository.update(id, req.body);
             return res.status(200).json({
                 message: 'Department updated successfully',
             });
@@ -42,7 +40,7 @@ exports.departmentControllers = {
     deleteDepartment: async (req, res) => {
         try {
             const { id } = req.params;
-            await departmentRepository.delete(id);
+            await repositories_1.departmentRepository.delete(id);
             return res.status(200).json({
                 message: 'Department deleted successfully',
             });
@@ -56,7 +54,7 @@ exports.departmentControllers = {
     getOneDepartment: async (req, res) => {
         try {
             const { id } = req.params;
-            const department = await departmentRepository.findOneBy({ id });
+            const department = await repositories_1.departmentRepository.findOneBy({ id });
             if (!department)
                 return res
                     .status(404)
@@ -71,7 +69,7 @@ exports.departmentControllers = {
     },
     getAllDepartment: async (_req, res) => {
         try {
-            const departments = await departmentRepository.find();
+            const departments = await repositories_1.departmentRepository.find();
             return res.status(200).json(departments);
         }
         catch (error) {
@@ -82,7 +80,7 @@ exports.departmentControllers = {
     },
     getAllPersons: async (req, res) => {
         try {
-            const department = await departmentRepository
+            const department = await repositories_1.departmentRepository
                 .createQueryBuilder('department')
                 .leftJoinAndSelect('department.persons', 'person')
                 .where('department.id = :departmentId', {
@@ -106,9 +104,9 @@ exports.departmentControllers = {
     getAllAndGroupGenderPerson: async (_req, res) => {
         try {
             const result = [];
-            const departments = await departmentRepository.find();
+            const departments = await repositories_1.departmentRepository.find();
             for (const department of departments) {
-                const departments = await departmentRepository
+                const departments = await repositories_1.departmentRepository
                     .createQueryBuilder('department')
                     .leftJoinAndSelect('department.persons', 'person')
                     .where('department.id = :departmentId', {

@@ -1,8 +1,6 @@
 import { Request, Response } from 'express';
-import { AppDataSource } from '../data-source';
 import { Role } from '../entities/Role';
-
-const roleRepository = AppDataSource.getRepository(Role);
+import { roleRepository } from '../repositories';
 
 export const roleControllers = {
     createNewRole: async (req: Request, res: Response) => {

@@ -14,21 +14,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.personControllers = void 0;
 const data_source_1 = require("../data-source");
 const Person_1 = require("../entities/Person");
-const Account_1 = require("../entities/Account");
-const Department_1 = require("../entities/Department");
-const Role_1 = require("../entities/Role");
-const Ethnicity_1 = require("../entities/Ethnicity");
-const personRepository = data_source_1.AppDataSource.getRepository(Person_1.Person);
-const accountRepository = data_source_1.AppDataSource.getRepository(Account_1.Account);
-const departmentRepository = data_source_1.AppDataSource.getRepository(Department_1.Department);
-const roleRepository = data_source_1.AppDataSource.getRepository(Role_1.Role);
-const EthnicityRepository = data_source_1.AppDataSource.getRepository(Ethnicity_1.Ethnicity);
+const repositories_1 = require("../repositories");
 exports.personControllers = {
     createNewPerson: async (req, res) => {
         try {
             const _a = req.body, { accountId, departmentId, roleId, ethnicityId } = _a, remain = __rest(_a, ["accountId", "departmentId", "roleId", "ethnicityId"]);
             if (accountId) {
-                const account = await accountRepository.findOneBy({
+                const account = await repositories_1.accountRepository.findOneBy({
                     id: accountId,
                 });
                 if (!account)
@@ -38,7 +30,7 @@ exports.personControllers = {
                 remain.account = account;
             }
             if (departmentId) {
-                const department = await departmentRepository.findOneBy({
+                const department = await repositories_1.departmentRepository.findOneBy({
                     id: departmentId,
                 });
                 if (!department)
@@ -48,13 +40,13 @@ exports.personControllers = {
                 remain.department = department;
             }
             if (roleId) {
-                const role = await roleRepository.findOneBy({ id: roleId });
+                const role = await repositories_1.roleRepository.findOneBy({ id: roleId });
                 if (!role)
                     return res.status(404).json({ message: 'Role not found' });
                 remain.roles = [role];
             }
             if (ethnicityId) {
-                const ethnicity = await EthnicityRepository.findOneBy({
+                const ethnicity = await repositories_1.ethnicityRepository.findOneBy({
                     id: ethnicityId,
                 });
                 if (!ethnicity)
@@ -62,8 +54,8 @@ exports.personControllers = {
                         message: 'Ethnicity not found',
                     });
             }
-            const person = personRepository.create(Object.assign({}, remain));
-            await personRepository.save(person);
+            const person = repositories_1.personRepository.create(Object.assign({}, remain));
+            await repositories_1.personRepository.save(person);
             return res.status(200).json(person);
         }
         catch (error) {
@@ -75,7 +67,7 @@ exports.personControllers = {
     updatePerson: async (req, res) => {
         try {
             const { id } = req.params;
-            await personRepository.update(id, req.body);
+            await repositories_1.personRepository.update(id, req.body);
             return res.status(200).json({
                 message: 'Update success',
             });
@@ -156,7 +148,7 @@ exports.personControllers = {
     },
     getOnePerson: async (req, res) => {
         try {
-            const person = await personRepository
+            const person = await repositories_1.personRepository
                 .createQueryBuilder('person')
                 .where('person.id = :id', { id: req.params.id })
                 .getOne();
@@ -172,7 +164,7 @@ exports.personControllers = {
     },
     getAllPersons: async (_req, res) => {
         try {
-            const persons = await personRepository.find();
+            const persons = await repositories_1.personRepository.find();
             return res.status(200).json(persons);
         }
         catch (error) {
@@ -182,7 +174,7 @@ exports.personControllers = {
     getSomePersons: async (req, res) => {
         try {
             const { q } = req.query;
-            const persons = await personRepository
+            const persons = await repositories_1.personRepository
                 .createQueryBuilder('person')
                 .where('person.first_name LIKE :q', { q: `%${q}%` })
                 .orWhere('person.last_name LIKE :q', { q: `%${q}%` })

@@ -16,13 +16,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authControllers = void 0;
 const argon2_1 = __importDefault(require("argon2"));
-const data_source_1 = require("../data-source");
-const Account_1 = require("../entities/Account");
-const accountRepository = data_source_1.AppDataSource.getRepository(Account_1.Account);
+const repositories_1 = require("../repositories");
 exports.authControllers = {
     login: async (req, res) => {
         try {
-            const account = await accountRepository.findOneBy({
+            const account = await repositories_1.accountRepository.findOneBy({
                 username: req.body.username,
             });
             if (!account)
@@ -47,14 +45,14 @@ exports.authControllers = {
     },
     register: async (req, res) => {
         try {
-            const existUsername = await accountRepository.findOneBy({
+            const existUsername = await repositories_1.accountRepository.findOneBy({
                 username: req.body.username,
             });
             if (existUsername)
                 return res
                     .status(400)
                     .json({ message: 'Username already exists' });
-            const existEmail = await accountRepository.findOneBy({
+            const existEmail = await repositories_1.accountRepository.findOneBy({
                 email: req.body.email,
             });
             const hashedPassword = await argon2_1.default.hash(req.body.password);
@@ -62,8 +60,8 @@ exports.authControllers = {
                 return res
                     .status(400)
                     .json({ message: 'Email already exists' });
-            const newAccount = accountRepository.create(Object.assign(Object.assign({}, req.body), { password: hashedPassword }));
-            await accountRepository.save(newAccount);
+            const newAccount = repositories_1.accountRepository.create(Object.assign(Object.assign({}, req.body), { password: hashedPassword }));
+            await repositories_1.accountRepository.save(newAccount);
             return res.status(200).json(newAccount);
         }
         catch (error) {

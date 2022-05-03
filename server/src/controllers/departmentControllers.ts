@@ -1,10 +1,8 @@
 import { Request, Response } from 'express';
-import { AppDataSource } from '../data-source';
 import { Department } from '../entities/Department';
 import { Person } from '../entities/Person';
 import { groupBy } from '../functions/groupBy';
-
-const departmentRepository = AppDataSource.getRepository(Department);
+import { departmentRepository } from '../repositories';
 
 interface IGenderResult {
     name: string;

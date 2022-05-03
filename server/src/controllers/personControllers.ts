@@ -1,16 +1,13 @@
 import { Request, Response } from 'express';
 import { AppDataSource } from '../data-source';
 import { Person } from '../entities/Person';
-import { Account } from '../entities/Account';
-import { Department } from '../entities/Department';
-import { Role } from '../entities/Role';
-import { Ethnicity } from '../entities/Ethnicity';
-
-const personRepository = AppDataSource.getRepository(Person);
-const accountRepository = AppDataSource.getRepository(Account);
-const departmentRepository = AppDataSource.getRepository(Department);
-const roleRepository = AppDataSource.getRepository(Role);
-const EthnicityRepository = AppDataSource.getRepository(Ethnicity);
+import {
+    personRepository,
+    accountRepository,
+    departmentRepository,
+    roleRepository,
+    ethnicityRepository,
+} from '../repositories';
 
 export const personControllers = {
     createNewPerson: async (req: Request, res: Response) => {
@@ -44,7 +41,7 @@ export const personControllers = {
                 remain.roles = [role];
             }
             if (ethnicityId) {
-                const ethnicity = await EthnicityRepository.findOneBy({
+                const ethnicity = await ethnicityRepository.findOneBy({
                     id: ethnicityId,
                 });
                 if (!ethnicity)

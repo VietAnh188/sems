@@ -1,21 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.roleControllers = void 0;
-const data_source_1 = require("../data-source");
-const Role_1 = require("../entities/Role");
-const roleRepository = data_source_1.AppDataSource.getRepository(Role_1.Role);
+const repositories_1 = require("../repositories");
 exports.roleControllers = {
     createNewRole: async (req, res) => {
         try {
-            const existingRole = await roleRepository.findOneBy({
+            const existingRole = await repositories_1.roleRepository.findOneBy({
                 name: req.body.name,
             });
             if (existingRole)
                 return res.status(400).json({
                     message: 'Role already exists',
                 });
-            const newRole = roleRepository.create(req.body);
-            await roleRepository.save(newRole);
+            const newRole = repositories_1.roleRepository.create(req.body);
+            await repositories_1.roleRepository.save(newRole);
             return res.status(200).json(newRole);
         }
         catch (error) {
@@ -27,7 +25,7 @@ exports.roleControllers = {
     updateRole: async (req, res) => {
         try {
             const { id } = req.params;
-            await roleRepository.update(id, req.body);
+            await repositories_1.roleRepository.update(id, req.body);
             return res.status(200).json({
                 message: 'Role updated successfully',
             });
@@ -41,7 +39,7 @@ exports.roleControllers = {
     deleteRole: async (req, res) => {
         try {
             const { id } = req.params;
-            await roleRepository.delete(id);
+            await repositories_1.roleRepository.delete(id);
             return res.status(200).json({
                 message: 'Role deleted successfully',
             });
