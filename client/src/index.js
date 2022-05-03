@@ -11,23 +11,32 @@ import Management from './pages/management';
 import Main from './Main';
 import store from './redux/store';
 import { Provider } from 'react-redux';
+import GlobalStyles from './components/GlobalStyles';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <Provider store={store}>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<App />}>
-                        <Route path="login" element={<Login />} />
-                        <Route path="main" element={<Main />}>
-                            <Route path="dashboard" element={<Dashboard />} />
-                            <Route path="management" element={<Management />} />
+        <GlobalStyles>
+            <Provider store={store}>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<App />}>
+                            <Route path="login" element={<Login />} />
+                            <Route path="main" element={<Main />}>
+                                <Route
+                                    path="dashboard"
+                                    element={<Dashboard />}
+                                />
+                                <Route
+                                    path="management"
+                                    element={<Management />}
+                                />
+                            </Route>
                         </Route>
-                    </Route>
-                </Routes>
-                <App />
-            </BrowserRouter>
-        </Provider>
+                    </Routes>
+                    <App />
+                </BrowserRouter>
+            </Provider>
+        </GlobalStyles>
     </React.StrictMode>
 );
