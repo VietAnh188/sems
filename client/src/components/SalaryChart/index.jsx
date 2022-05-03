@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { salary } from '../../dummy';
 import {
     AreaChart,
@@ -12,7 +11,7 @@ import {
 } from 'recharts';
 import { Wrapper, Title } from '../../StyledComponents';
 
-const SalaryChart = () => {
+const SalaryChart = ({ data }) => {
     return (
         <Wrapper>
             <Title>Salary</Title>

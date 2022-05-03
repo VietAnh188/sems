@@ -48,6 +48,7 @@ export const personControllers = {
                     return res.status(404).json({
                         message: 'Ethnicity not found',
                     });
+                remain.ethnicity = ethnicity;
             }
             const person: Person[] = personRepository.create({ ...remain });
             await personRepository.save(person);

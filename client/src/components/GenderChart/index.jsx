@@ -12,15 +12,14 @@ import {
     Legend,
     Bar,
 } from 'recharts';
-import { gender } from '../../dummy';
 
-const GenderChart = () => {
+const GenderChart = ({ data }) => {
     return (
         <Wrapper>
             <Title>Gender</Title>
             <ResponsiveContainer width="100%" height={300}>
                 <BarChart
-                    data={gender}
+                    data={data}
                     margin={{
                         top: 5,
                         right: 20,
