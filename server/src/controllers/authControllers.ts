@@ -18,6 +18,7 @@ export const authControllers = {
                     .createQueryBuilder('account')
                     .leftJoinAndSelect('account.person', 'person')
                     .where('account.id = :id', { id: account.id })
+                    .leftJoinAndSelect('person.roles', 'roles')
                     .getOne();
                 if (!accountRelational) {
                     return res.status(404).json({
