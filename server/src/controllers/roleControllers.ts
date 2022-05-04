@@ -5,7 +5,7 @@ import { roleRepository } from '../repositories';
 export const roleControllers = {
     createNewRole: async (req: Request, res: Response) => {
         try {
-            const existingRole = await roleRepository.findOneBy({
+            const existingRole: Role | null = await roleRepository.findOneBy({
                 name: req.body.name,
             });
 

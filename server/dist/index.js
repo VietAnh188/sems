@@ -13,6 +13,7 @@ const authRoute_1 = require("./routes/authRoute");
 const roleRoute_1 = require("./routes/roleRoute");
 const personRoute_1 = require("./routes/personRoute");
 const departmentRoute_1 = require("./routes/departmentRoute");
+const ethnicityRoute_1 = require("./routes/ethnicityRoute");
 data_source_1.AppDataSource.initialize()
     .then(() => {
     const app = (0, express_1.default)();
@@ -26,6 +27,7 @@ data_source_1.AppDataSource.initialize()
     app.use('/api/role', roleRoute_1.RoleRouter);
     app.use('/api/person', personRoute_1.PersonRouter);
     app.use('/api/department', departmentRoute_1.DepartmentRouter);
+    app.use('/api/ethnicity', ethnicityRoute_1.EthnicityRouter);
     const port = process.env.PORT || 1808;
     app.listen(port, () => {
         console.log(`Listening on port ${port}`);

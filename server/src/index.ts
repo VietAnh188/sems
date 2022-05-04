@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 require('dotenv').config();
-import express from 'express';
+import express, { Express } from 'express';
 import cors from 'cors';
 import path from 'path';
 import { AppDataSource } from './data-source';
@@ -8,10 +8,11 @@ import { AuthRouter } from './routes/authRoute';
 import { RoleRouter } from './routes/roleRoute';
 import { PersonRouter } from './routes/personRoute';
 import { DepartmentRouter } from './routes/departmentRoute';
+import { EthnicityRouter } from './routes/ethnicityRoute';
 
 AppDataSource.initialize()
     .then(() => {
-        const app = express();
+        const app: Express = express();
 
         app.get('/', (_, res) => {
             res.send('Hello World!');
@@ -29,6 +30,7 @@ AppDataSource.initialize()
         app.use('/api/role', RoleRouter);
         app.use('/api/person', PersonRouter);
         app.use('/api/department', DepartmentRouter);
+        app.use('/api/ethnicity', EthnicityRouter);
 
         const port = process.env.PORT || 1808;
 
