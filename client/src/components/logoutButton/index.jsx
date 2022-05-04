@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './styles.module.scss';
 import styled from 'styled-components';
 import { FiLogOut } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 
 const Button = styled.button`
     display: flex;
@@ -18,8 +19,16 @@ const Button = styled.button`
 `;
 
 const LogoutButton = () => {
+    const navigate = useNavigate();
+
+    const handleLogout = event => {
+        event.preventDefault();
+        localStorage.removeItem('user');
+        navigate('/login');
+    };
+
     return (
-        <Button className={styles.logout}>
+        <Button className={styles.logout} onClick={handleLogout}>
             <FiLogOut className={styles.icon} />
             Logout
         </Button>

@@ -10,6 +10,8 @@ import { MdOutlineBugReport } from 'react-icons/md';
 import { AiOutlineSetting } from 'react-icons/ai';
 import LogoutButton from '../../components/logoutButton';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { authSelector } from '../../redux/features/auth';
 
 const Username = styled.span`
     font-size: 15px;
@@ -24,13 +26,18 @@ const Role = styled.span`
 `;
 
 const LeftBar = () => {
+    const { user } = useSelector(authSelector);
+
     return (
         <div className={styles.leftbar}>
             <div className={styles.leftbar_wrapper}>
                 <div className={styles.leftbar_wrapper_info}>
-                    <img src={avatar} alt="avatar" />
+                    <img
+                        src={user.avatar || DImages + 'avatarDefault.png'}
+                        alt="avatar"
+                    />
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        <Username>Username</Username>
+                        <Username>{user.username}</Username>
                         <Role>Manager</Role>
                     </div>
                 </div>
