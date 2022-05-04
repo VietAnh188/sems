@@ -23,6 +23,7 @@ const Two = styled.div`
 
 const Dashboard = () => {
     const [groupGender, setGroupGender] = useState([]);
+    const [groupWorkingType, setGroupWorkingType] = useState([]);
 
     useEffect(() => {
         (async () => {
@@ -36,6 +37,20 @@ const Dashboard = () => {
                 return item;
             });
             setGroupGender(result);
+        })();
+        (async () => {
+            const { data } = await axios.get(
+                '/department/getallgroupworkingtype'
+            );
+            const result = data.map(item => {
+                for (const key in item) {
+                    if (Array.isArray(item[key])) {
+                        item[key] = item[key].length;
+                    }
+                }
+                return item;
+            });
+            setGroupWorkingType(result);
         })();
     }, []);
 
@@ -61,7 +76,7 @@ const Dashboard = () => {
             </Row>
             <Row className={styles.margin_bottom}>
                 <One className={styles.box}>
-                    <WorkingTypeChart />
+                    <WorkingTypeChart data={groupWorkingType} />
                 </One>
             </Row>
             <Row className={styles.margin_bottom}>

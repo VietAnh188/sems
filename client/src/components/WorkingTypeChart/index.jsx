@@ -9,17 +9,16 @@ import {
     Legend,
     Bar,
 } from 'recharts';
-import styles from './styles.module.scss';
 import { Wrapper, Title } from '../../StyledComponents';
 import { workingType } from '../../dummy';
 
-const WorkingTypeChart = () => {
+const WorkingTypeChart = ({ data }) => {
     return (
         <Wrapper>
             <Title>Working type</Title>
             <ResponsiveContainer width="100%" height={300}>
                 <BarChart
-                    data={workingType}
+                    data={data || workingType}
                     margin={{
                         top: 20,
                         right: 30,

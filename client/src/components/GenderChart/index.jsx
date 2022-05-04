@@ -20,7 +20,7 @@ const GenderChart = ({ data }) => {
             <Title>Gender</Title>
             <ResponsiveContainer width="100%" height={300}>
                 <BarChart
-                    data={data && gender}
+                    data={data || gender}
                     margin={{
                         top: 5,
                         right: 20,
