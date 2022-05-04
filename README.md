@@ -8,6 +8,10 @@
 
 -   Anh, Le Viet
 
+### UI/UX DESIGN
+
+-   https://www.figma.com/community/file/1101191280311497100
+
 ### BUILT WITH
 
 This section will list the main frameworks/libraries used in the project. Here are some specific examples:
