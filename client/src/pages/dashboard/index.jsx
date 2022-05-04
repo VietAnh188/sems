@@ -25,31 +25,24 @@ const Dashboard = () => {
     const [groupGender, setGroupGender] = useState([]);
     const [groupWorkingType, setGroupWorkingType] = useState([]);
 
+    const fetchGroupData = async api => {
+        const { data } = await axios.get(api);
+        const result = data.map(item => {
+            for (const key in item) {
+                if (Array.isArray(item[key])) item[key] = item[key].length;
+            }
+            return item;
+        });
+        return result;
+    };
+
     useEffect(() => {
-        (async () => {
-            const { data } = await axios.get('/department/groupgender');
-            const result = data.map(item => {
-                for (const key in item) {
-                    if (Array.isArray(item[key])) {
-                        item[key] = item[key].length;
-                    }
-                }
-                return item;
-            });
-            setGroupGender(result);
-        })();
-        (async () => {
-            const { data } = await axios.get('/department/groupworkingtype');
-            const result = data.map(item => {
-                for (const key in item) {
-                    if (Array.isArray(item[key])) {
-                        item[key] = item[key].length;
-                    }
-                }
-                return item;
-            });
-            setGroupWorkingType(result);
-        })();
+        fetchGroupData('/department/groupgender')
+            .then(data => setGroupGender(data))
+            .catch(error => console.log(error));
+        fetchGroupData('/department/groupworkingtype')
+            .then(data => setGroupWorkingType(data))
+            .catch(error => console.log(error));
     }, []);
 
     return (
