@@ -11,6 +11,12 @@ interface IGenderResult {
     other: Person[];
 }
 
+interface IWorkingTypeResult {
+    name: string;
+    'full-time': Person[];
+    'part-time': Person[];
+}
+
 export const departmentControllers = {
     createNewDepartment: async (req: Request, res: Response) => {
         try {
@@ -132,6 +138,40 @@ export const departmentControllers = {
                     return {
                         name: department.name,
                         ...groupedByGender,
+                    };
+                }
+            );
+            return res.status(200).json(finalResult);
+        } catch (error) {
+            return res.status(500).json({
+                message: error,
+            });
+        }
+    },
+    getAllAndGroupWorkingTypePerson: async (_req: Request, res: Response) => {
+        try {
+            const result: Department[] = [];
+            const departments: Department[] = await departmentRepository.find();
+            for (const department of departments) {
+                const departments: Department[] = await departmentRepository
+                    .createQueryBuilder('department')
+                    .leftJoinAndSelect('department.persons', 'person')
+                    .where('department.id = :departmentId', {
+                        departmentId: department.id,
+                    })
+                    .getMany();
+                result.push(...departments);
+            }
+            const finalResult: IWorkingTypeResult[] = result.map(
+                (department: Department) => {
+                    const { persons } = department;
+                    const groupedByWorkingType = groupBy(
+                        persons,
+                        (person: Person) => person.working_type
+                    );
+                    return {
+                        name: department.name,
+                        ...groupedByWorkingType,
                     };
                 }
             );

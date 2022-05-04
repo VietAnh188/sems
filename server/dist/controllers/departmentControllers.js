@@ -128,5 +128,32 @@ exports.departmentControllers = {
             });
         }
     },
+    getAllAndGroupWorkingTypePerson: async (_req, res) => {
+        try {
+            const result = [];
+            const departments = await repositories_1.departmentRepository.find();
+            for (const department of departments) {
+                const departments = await repositories_1.departmentRepository
+                    .createQueryBuilder('department')
+                    .leftJoinAndSelect('department.persons', 'person')
+                    .where('department.id = :departmentId', {
+                    departmentId: department.id,
+                })
+                    .getMany();
+                result.push(...departments);
+            }
+            const finalResult = result.map((department) => {
+                const { persons } = department;
+                const groupedByWorkingType = (0, groupBy_1.groupBy)(persons, (person) => person.working_type);
+                return Object.assign({ name: department.name }, groupedByWorkingType);
+            });
+            return res.status(200).json(finalResult);
+        }
+        catch (error) {
+            return res.status(500).json({
+                message: error,
+            });
+        }
+    },
 };
 //# sourceMappingURL=departmentControllers.js.map

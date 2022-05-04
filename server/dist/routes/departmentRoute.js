@@ -12,6 +12,7 @@ router.post('/', departmentControllers_1.departmentControllers.createNewDepartme
 router.put('/:id', departmentControllers_1.departmentControllers.updateDepartment);
 router.delete('/:id', departmentControllers_1.departmentControllers.deleteDepartment);
 router.get('/getallgroupgender', departmentControllers_1.departmentControllers.getAllAndGroupGenderPerson);
+router.get('/getallgroupworkingtype', departmentControllers_1.departmentControllers.getAllAndGroupWorkingTypePerson);
 router.get('/:id/persons', departmentControllers_1.departmentControllers.getAllPersons);
 router.get('/:id', departmentControllers_1.departmentControllers.getOneDepartment);
 router.get('/', departmentControllers_1.departmentControllers.getAllDepartment);
