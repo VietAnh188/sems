@@ -27,7 +27,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         (async () => {
-            const { data } = await axios.get('/department/getallgroupgender');
+            const { data } = await axios.get('/department/groupgender');
             const result = data.map(item => {
                 for (const key in item) {
                     if (Array.isArray(item[key])) {
@@ -39,9 +39,7 @@ const Dashboard = () => {
             setGroupGender(result);
         })();
         (async () => {
-            const { data } = await axios.get(
-                '/department/getallgroupworkingtype'
-            );
+            const { data } = await axios.get('/department/groupworkingtype');
             const result = data.map(item => {
                 for (const key in item) {
                     if (Array.isArray(item[key])) {
