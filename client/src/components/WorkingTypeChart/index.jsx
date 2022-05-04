@@ -1,7 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
-import styles from './styles.module.scss';
-import { Wrapper, Title } from '../../StyledComponents';
 import {
     ResponsiveContainer,
     BarChart,
@@ -12,34 +9,36 @@ import {
     Legend,
     Bar,
 } from 'recharts';
-import { gender } from '../../dummy';
+import styles from './styles.module.scss';
+import { Wrapper, Title } from '../../StyledComponents';
+import { workingType } from '../../dummy';
 
-const GenderChart = ({ data }) => {
+const WorkingTypeChart = () => {
     return (
         <Wrapper>
-            <Title>Gender</Title>
+            <Title>Working type</Title>
             <ResponsiveContainer width="100%" height={300}>
                 <BarChart
-                    data={data && gender}
+                    data={workingType}
                     margin={{
-                        top: 5,
-                        right: 20,
-                        left: 0,
+                        top: 20,
+                        right: 30,
+                        left: 20,
                         bottom: 5,
                     }}
+                    barSize={50}
                 >
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="male" fill="#8884d8" />
-                    <Bar dataKey="female" fill="#82ca9d" />
-                    <Bar dataKey="other" fill="#82ca1a" />
+                    <Bar dataKey="full-time" stackId="a" fill="#8884d8" />
+                    <Bar dataKey="part-time" stackId="a" fill="#82ca9d" />
                 </BarChart>
             </ResponsiveContainer>
         </Wrapper>
     );
 };
 
-export default GenderChart;
+export default WorkingTypeChart;

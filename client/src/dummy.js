@@ -131,3 +131,21 @@ export const ethnicity = [
         total: 1000,
     },
 ];
+
+export const workingType = [
+    {
+        name: 'Human Resource',
+        'full-time': 1000,
+        'part-time': 500,
+    },
+    {
+        name: 'Adminstration',
+        'full-time': 2000,
+        'part-time': 700,
+    },
+    {
+        name: 'Development',
+        'full-time': 3000,
+        'part-time': 1000,
+    },
+];

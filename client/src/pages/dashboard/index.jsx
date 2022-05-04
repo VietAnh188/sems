@@ -6,6 +6,7 @@ import BenefitChart from '../../components/BenefitChart';
 import GenderChart from '../../components/GenderChart';
 import EthnicityChart from '../../components/EthnicityChart';
 import axios from 'axios';
+import WorkingTypeChart from '../../components/WorkingTypeChart';
 
 const Row = styled.div`
     display: flex;
@@ -60,11 +61,13 @@ const Dashboard = () => {
             </Row>
             <Row className={styles.margin_bottom}>
                 <One className={styles.box}>
-                    <EthnicityChart />
+                    <WorkingTypeChart />
                 </One>
             </Row>
             <Row className={styles.margin_bottom}>
-                <One className={styles.box}>5</One>
+                <One className={styles.box}>
+                    <EthnicityChart />
+                </One>
             </Row>
             <Row>
                 <One className={styles.box}>6</One>
