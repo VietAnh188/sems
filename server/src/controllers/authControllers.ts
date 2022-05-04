@@ -14,7 +14,17 @@ export const authControllers = {
                     .status(400)
                     .json({ message: 'Username does not exist' });
             if (await argon2.verify(account.password, req.body.password)) {
-                const { password, ...remain } = account;
+                const accountRelational = await accountRepository
+                    .createQueryBuilder('account')
+                    .leftJoinAndSelect('account.person', 'person')
+                    .where('account.id = :id', { id: account.id })
+                    .getOne();
+                if (!accountRelational) {
+                    return res.status(404).json({
+                        message: 'Account not found',
+                    });
+                }
+                const { password, ...remain } = accountRelational;
                 return res.status(200).json({ ...remain });
             } else {
                 return res
