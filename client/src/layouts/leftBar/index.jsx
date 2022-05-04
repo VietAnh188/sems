@@ -26,19 +26,29 @@ const Role = styled.span`
 `;
 
 const LeftBar = () => {
-    const { user } = useSelector(authSelector);
+    const {
+        user: {
+            username,
+            person: { first_name, last_name, roles },
+        },
+    } = useSelector(authSelector);
 
     return (
         <div className={styles.leftbar}>
             <div className={styles.leftbar_wrapper}>
                 <div className={styles.leftbar_wrapper_info}>
-                    <img
-                        src={user.avatar || DImages + 'avatarDefault.png'}
-                        alt="avatar"
-                    />
+                    <img src={DImages + 'avatarDefault.png'} alt="avatar" />
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        <Username>{user.username}</Username>
-                        <Role>Manager</Role>
+                        <Username>
+                            {first_name && last_name
+                                ? `${first_name} ${last_name}`
+                                : username}
+                        </Username>
+                        <Role>
+                            {roles.map(role => (
+                                <span key={role.id}>{role.name}</span>
+                            ))}
+                        </Role>
                     </div>
                 </div>
                 <div className={styles.leftbar_wrapper_feature}>
