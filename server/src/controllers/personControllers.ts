@@ -186,9 +186,9 @@ export const personControllers = {
                 persons,
                 (person: Person): Date => person.hiring_date
             );
-            for (const [key, persons] of Object.entries(groupedPersons)) {
+            for (const [month, persons] of Object.entries(groupedPersons)) {
                 result.push({
-                    name: key,
+                    name: month,
                     ...groupByYear(
                         persons,
                         (person: Person): Date => person.hiring_date

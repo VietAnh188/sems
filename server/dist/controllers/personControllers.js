@@ -192,8 +192,8 @@ exports.personControllers = {
             const result = [];
             const persons = await repositories_1.personRepository.find();
             const groupedPersons = (0, groupBy_1.groupByMonth)(persons, (person) => person.hiring_date);
-            for (const [key, persons] of Object.entries(groupedPersons)) {
-                result.push(Object.assign({ name: key }, (0, groupBy_1.groupByYear)(persons, (person) => person.hiring_date)));
+            for (const [month, persons] of Object.entries(groupedPersons)) {
+                result.push(Object.assign({ name: month }, (0, groupBy_1.groupByYear)(persons, (person) => person.hiring_date)));
             }
             return res.status(200).json(result);
         }
