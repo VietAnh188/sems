@@ -8,6 +8,12 @@ import {
     roleRepository,
     ethnicityRepository,
 } from '../repositories';
+import { groupByMonth, groupByYear } from '../functions/groupBy';
+
+interface IHiringResult {
+    name: string;
+    [key: string]: string | Person[];
+}
 
 export const personControllers = {
     createNewPerson: async (req: Request, res: Response) => {
@@ -153,7 +159,7 @@ export const personControllers = {
     },
     getAllPersons: async (_req: Request, res: Response) => {
         try {
-            const persons = await personRepository.find();
+            const persons: Person[] = await personRepository.find();
             return res.status(200).json(persons);
         } catch (error) {
             return res.status(500).json({ message: error });
@@ -162,12 +168,34 @@ export const personControllers = {
     getSomePersons: async (req: Request, res: Response) => {
         try {
             const { q } = req.query;
-            const persons = await personRepository
+            const persons: Person[] = await personRepository
                 .createQueryBuilder('person')
                 .where('person.first_name LIKE :q', { q: `%${q}%` })
                 .orWhere('person.last_name LIKE :q', { q: `%${q}%` })
                 .getMany();
             return res.status(200).json(persons);
+        } catch (error) {
+            return res.status(500).json({ message: error });
+        }
+    },
+    getAllAndGroupHiring: async (_req: Request, res: Response) => {
+        try {
+            const result: IHiringResult[] = [];
+            const persons: Person[] = await personRepository.find();
+            const groupedPersons: Record<string, Person[]> = groupByMonth(
+                persons,
+                (person: Person): Date => person.hiring_date
+            );
+            for (const [key, persons] of Object.entries(groupedPersons)) {
+                result.push({
+                    name: key,
+                    ...groupByYear(
+                        persons,
+                        (person: Person): Date => person.hiring_date
+                    ),
+                });
+            }
+            return res.status(200).json(result);
         } catch (error) {
             return res.status(500).json({ message: error });
         }

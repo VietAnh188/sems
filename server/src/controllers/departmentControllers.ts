@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { Department } from '../entities/Department';
 import { Person } from '../entities/Person';
-import { groupBy } from '../functions/groupBy';
+import { groupByKey } from '../functions/groupBy';
 import { departmentRepository } from '../repositories';
 
 interface IGenderResult {
@@ -131,7 +131,7 @@ export const departmentControllers = {
             const finalResult: IGenderResult[] = result.map(
                 (department: Department): IGenderResult => {
                     const { persons } = department;
-                    const groupedByGender = groupBy(
+                    const groupedByGender = groupByKey(
                         persons,
                         (person: Person) => person.gender
                     );
@@ -165,7 +165,7 @@ export const departmentControllers = {
             const finalResult: IWorkingTypeResult[] = result.map(
                 (department: Department) => {
                     const { persons } = department;
-                    const groupedByWorkingType = groupBy(
+                    const groupedByWorkingType = groupByKey(
                         persons,
                         (person: Person) => person.working_type
                     );

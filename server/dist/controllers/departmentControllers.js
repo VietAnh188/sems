@@ -117,7 +117,7 @@ exports.departmentControllers = {
             }
             const finalResult = result.map((department) => {
                 const { persons } = department;
-                const groupedByGender = (0, groupBy_1.groupBy)(persons, (person) => person.gender);
+                const groupedByGender = (0, groupBy_1.groupByKey)(persons, (person) => person.gender);
                 return Object.assign({ name: department.name }, groupedByGender);
             });
             return res.status(200).json(finalResult);
@@ -144,7 +144,7 @@ exports.departmentControllers = {
             }
             const finalResult = result.map((department) => {
                 const { persons } = department;
-                const groupedByWorkingType = (0, groupBy_1.groupBy)(persons, (person) => person.working_type);
+                const groupedByWorkingType = (0, groupBy_1.groupByKey)(persons, (person) => person.working_type);
                 return Object.assign({ name: department.name }, groupedByWorkingType);
             });
             return res.status(200).json(finalResult);
