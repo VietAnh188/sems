@@ -17,7 +17,7 @@ const SalaryChart = ({ data }) => {
             <Title>Salary</Title>
             <ResponsiveContainer width="100%" height={200}>
                 <AreaChart
-                    data={salary}
+                    data={data || salary}
                     margin={{ top: 10, right: 20, left: 0, bottom: 0 }}
                 >
                     <defs>
