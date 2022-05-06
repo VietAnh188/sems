@@ -15,18 +15,18 @@ export const groupByMonth = <T extends any>(
     getKey: (item: T) => Date
 ): Record<string, T[]> => {
     const months: string[] = [
-        'January',
-        'February',
-        'March',
-        'April',
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
         'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
     ];
     return data.reduce(
         (prev: Record<string, T[]>, curr: T): Record<string, T[]> => {

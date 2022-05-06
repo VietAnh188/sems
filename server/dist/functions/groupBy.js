@@ -13,18 +13,18 @@ const groupByKey = (data, getKey) => {
 exports.groupByKey = groupByKey;
 const groupByMonth = (data, getKey) => {
     const months = [
-        'January',
-        'February',
-        'March',
-        'April',
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
         'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
     ];
     return data.reduce((prev, curr) => {
         const key = getKey(curr);
