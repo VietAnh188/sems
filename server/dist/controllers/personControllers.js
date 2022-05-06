@@ -16,6 +16,7 @@ const data_source_1 = require("../data-source");
 const Person_1 = require("../entities/Person");
 const repositories_1 = require("../repositories");
 const groupBy_1 = require("../functions/groupBy");
+const groupBy_2 = require("../functions/groupBy");
 exports.personControllers = {
     createNewPerson: async (req, res) => {
         try {
@@ -195,7 +196,9 @@ exports.personControllers = {
             for (const [month, persons] of Object.entries(groupedPersons)) {
                 result.push(Object.assign({ name: month }, (0, groupBy_1.groupByYear)(persons, (person) => person.hiring_date)));
             }
-            return res.status(200).json(result);
+            return res.status(200).json(result.sort((a, b) => {
+                return groupBy_2.months.indexOf(a.name) - groupBy_2.months.indexOf(b.name);
+            }));
         }
         catch (error) {
             return res.status(500).json({ message: error });

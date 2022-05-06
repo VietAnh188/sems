@@ -10,24 +10,25 @@ export const groupByKey = <T, K extends keyof any>(
     }, {} as Record<K, T[]>);
 };
 
+export const months: string[] = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+];
+
 export const groupByMonth = <T extends any>(
     data: T[],
     getKey: (item: T) => Date
 ): Record<string, T[]> => {
-    const months: string[] = [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-    ];
     return data.reduce(
         (prev: Record<string, T[]>, curr: T): Record<string, T[]> => {
             const key: Date = getKey(curr);

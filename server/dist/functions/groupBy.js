@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.groupByYear = exports.groupByMonth = exports.groupByKey = void 0;
+exports.groupByYear = exports.groupByMonth = exports.months = exports.groupByKey = void 0;
 const groupByKey = (data, getKey) => {
     return data.reduce((prev, curr) => {
         const key = getKey(curr);
@@ -11,24 +11,24 @@ const groupByKey = (data, getKey) => {
     }, {});
 };
 exports.groupByKey = groupByKey;
+exports.months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+];
 const groupByMonth = (data, getKey) => {
-    const months = [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-    ];
     return data.reduce((prev, curr) => {
         const key = getKey(curr);
-        const month = months[new Date(key).getMonth()];
+        const month = exports.months[new Date(key).getMonth()];
         return Object.assign(Object.assign({}, prev), { [month]: [...(prev[month] || []), curr] });
     }, {});
 };

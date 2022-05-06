@@ -9,6 +9,7 @@ import {
     ethnicityRepository,
 } from '../repositories';
 import { groupByMonth, groupByYear } from '../functions/groupBy';
+import { months } from '../functions/groupBy';
 
 interface IHiringResult {
     name: string;
@@ -195,7 +196,11 @@ export const personControllers = {
                     ),
                 });
             }
-            return res.status(200).json(result);
+            return res.status(200).json(
+                result.sort((a: IHiringResult, b: IHiringResult) => {
+                    return months.indexOf(a.name) - months.indexOf(b.name);
+                })
+            );
         } catch (error) {
             return res.status(500).json({ message: error });
         }
