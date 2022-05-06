@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import styles from './styles.module.scss';
 import SalaryChart from '../../components/SalaryChart';
 import BenefitChart from '../../components/BenefitChart';
 import GenderChart from '../../components/GenderChart';
 import EthnicityChart from '../../components/EthnicityChart';
-import axios from 'axios';
 import WorkingTypeChart from '../../components/WorkingTypeChart';
+import { useGroupWithLength, useGroupWithTotal } from '../../hooks';
 
 const Row = styled.div`
     display: flex;
@@ -22,55 +22,15 @@ const Two = styled.div`
 `;
 
 const Dashboard = () => {
-    const [groupGender, setGroupGender] = useState([]);
-    const [groupWorkingType, setGroupWorkingType] = useState([]);
-    const [groupHiring, setGroupHiring] = useState([]);
-
-    const fetchGroupDataWithLength = async api => {
-        const { data } = await axios.get(api);
-        const result = data.map(item => {
-            for (const key in item) {
-                if (Array.isArray(item[key])) item[key] = item[key].length;
-            }
-            return item;
-        });
-        return result;
-    };
-
-    const fetchGroupDataWithTotal = async api => {
-        const { data } = await axios.get(api);
-        const result = data.map(item => {
-            for (const key in item) {
-                if (Array.isArray(item[key])) {
-                    item[key] = item[key].reduce((prev, curr) => {
-                        const money = curr.salary.split('$');
-                        if (money[1].includes(',')) {
-                            curr.salary = Number(money[1].replace(',', ''));
-                        } else {
-                            curr.salary = Number(money[1]);
-                        }
-                        return prev + curr.salary;
-                    }, 0);
-                }
-            }
-            return item;
-        });
-        return result;
-    };
-
-    useEffect(() => {
-        fetchGroupDataWithLength('/department/groupgender')
-            .then(data => setGroupGender(data))
-            .catch(error => console.log(error));
-        fetchGroupDataWithLength('/department/groupworkingtype')
-            .then(data => setGroupWorkingType(data))
-            .catch(error => console.log(error));
-        fetchGroupDataWithTotal('/person/grouphiring')
-            .then(data => setGroupHiring(data))
-            .catch(error => console.log(error));
-    }, []);
-
-    console.log(groupHiring);
+    const groupGender = useGroupWithLength({
+        api: '/department/groupgender',
+    });
+    const groupWorkingType = useGroupWithLength({
+        api: '/department/groupworkingtype',
+    });
+    const groupHiring = useGroupWithTotal({
+        api: '/person/grouphiring',
+    });
 
     return (
         <>
