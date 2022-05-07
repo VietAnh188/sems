@@ -1,6 +1,12 @@
 import { Request, Response } from 'express';
+import { Person } from '../entities/Person';
 import { Ethnicity } from '../entities/Ethnicity';
 import { ethnicityRepository } from '../repositories';
+
+interface IEthnicitysPersonsResult {
+    name: string;
+    persons: Person[];
+}
 
 export const ethnicityControllers = {
     createNewEthnicity: async (req: Request, res: Response) => {
@@ -76,6 +82,34 @@ export const ethnicityControllers = {
             }
             const { persons } = ethnicity;
             return res.status(200).json(persons);
+        } catch (error) {
+            return res.status(500).json({
+                message: error,
+            });
+        }
+    },
+    getAllPersonsInAllEthnicity: async (_req: Request, res: Response) => {
+        try {
+            const result: Ethnicity[] = [];
+            const ethnicitys: Ethnicity[] = await ethnicityRepository.find();
+            for (const ethnicity of ethnicitys) {
+                const ethnicityWithPersons: Ethnicity | null =
+                    await ethnicityRepository
+                        .createQueryBuilder('ethnicity')
+                        .leftJoinAndSelect('ethnicity.persons', 'persons')
+                        .where('ethnicity.id = :ethnicityId', {
+                            ethnicityId: ethnicity.id,
+                        })
+                        .getOne();
+                ethnicityWithPersons && result.push(ethnicityWithPersons);
+            }
+            const finalResult: IEthnicitysPersonsResult[] = result.map(
+                (ethnicity: Ethnicity): IEthnicitysPersonsResult => ({
+                    name: ethnicity.name,
+                    persons: ethnicity.persons,
+                })
+            );
+            return res.status(200).json(finalResult);
         } catch (error) {
             return res.status(500).json({
                 message: error,

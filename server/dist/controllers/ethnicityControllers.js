@@ -84,5 +84,31 @@ exports.ethnicityControllers = {
             });
         }
     },
+    getAllPersonsInAllEthnicity: async (_req, res) => {
+        try {
+            const result = [];
+            const ethnicitys = await repositories_1.ethnicityRepository.find();
+            for (const ethnicity of ethnicitys) {
+                const ethnicityWithPersons = await repositories_1.ethnicityRepository
+                    .createQueryBuilder('ethnicity')
+                    .leftJoinAndSelect('ethnicity.persons', 'persons')
+                    .where('ethnicity.id = :ethnicityId', {
+                    ethnicityId: ethnicity.id,
+                })
+                    .getOne();
+                ethnicityWithPersons && result.push(ethnicityWithPersons);
+            }
+            const finalResult = result.map((ethnicity) => ({
+                name: ethnicity.name,
+                persons: ethnicity.persons,
+            }));
+            return res.status(200).json(finalResult);
+        }
+        catch (error) {
+            return res.status(500).json({
+                message: error,
+            });
+        }
+    },
 };
 //# sourceMappingURL=ethnicityControllers.js.map
