@@ -50,5 +50,16 @@ exports.ethnicityControllers = {
             });
         }
     },
+    getAllEthnicity: async (_req, res) => {
+        try {
+            const ethnicitys = await repositories_1.ethnicityRepository.find();
+            return res.status(200).json(ethnicitys);
+        }
+        catch (error) {
+            return res.status(500).json({
+                meesage: error,
+            });
+        }
+    },
 };
 //# sourceMappingURL=ethnicityControllers.js.map

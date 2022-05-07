@@ -50,4 +50,14 @@ export const ethnicityControllers = {
             });
         }
     },
+    getAllEthnicity: async (_req: Request, res: Response) => {
+        try {
+            const ethnicitys = await ethnicityRepository.find();
+            return res.status(200).json(ethnicitys);
+        } catch (error) {
+            return res.status(500).json({
+                meesage: error,
+            });
+        }
+    },
 };

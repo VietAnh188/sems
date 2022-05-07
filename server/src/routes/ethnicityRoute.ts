@@ -3,6 +3,7 @@ import { ethnicityControllers } from '../controllers/ethnicityControllers';
 
 const router = express.Router();
 
+router.get('/', ethnicityControllers.getAllEthnicity);
 router.post('/', ethnicityControllers.createNewEthnicity);
 router.put('/:id', ethnicityControllers.updateEthnicity);
 router.delete('/:id', ethnicityControllers.deleteEthnicity);
