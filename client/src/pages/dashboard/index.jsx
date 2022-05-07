@@ -31,6 +31,9 @@ const Dashboard = () => {
     const groupHiring = useGroupWithTotal({
         api: '/person/group/hiring',
     });
+    const groupEthnicity = useGroupWithLength({
+        api: '/ethnicity/all/persons',
+    });
 
     return (
         <>
@@ -59,7 +62,7 @@ const Dashboard = () => {
             </Row>
             <Row className={styles.margin_bottom}>
                 <One className={styles.box}>
-                    <EthnicityChart />
+                    <EthnicityChart data={groupEthnicity} />
                 </One>
             </Row>
             <Row>

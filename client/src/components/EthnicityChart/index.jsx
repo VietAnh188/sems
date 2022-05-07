@@ -13,14 +13,19 @@ import {
 import { Wrapper, Title } from '../../StyledComponents';
 import { ethnicity } from '../../dummy';
 
-const EthnicityChart = () => {
+const EthnicityChart = ({ data }) => {
+    const dataFormated = data.map(item => ({
+        name: item.name,
+        total: item.persons,
+    }));
+
     return (
         <Wrapper>
             <Title>Ethnicity</Title>
             <ResponsiveContainer width="100%" height={400}>
                 <ComposedChart
                     layout="vertical"
-                    data={ethnicity}
+                    data={dataFormated || ethnicity}
                     margin={{
                         top: 20,
                         right: 20,
