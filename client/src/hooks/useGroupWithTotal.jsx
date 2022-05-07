@@ -29,7 +29,7 @@ const useGroupWithTotal = ({ api }) => {
         fetchGroupData(api)
             .then(data => setData(data))
             .catch(error => console.log(error));
-    }, []);
+    }, [api]);
 
     return data;
 };
