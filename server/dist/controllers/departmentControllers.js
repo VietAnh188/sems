@@ -82,7 +82,7 @@ exports.departmentControllers = {
         try {
             const department = await repositories_1.departmentRepository
                 .createQueryBuilder('department')
-                .leftJoinAndSelect('department.persons', 'person')
+                .leftJoinAndSelect('department.persons', 'persons')
                 .where('department.id = :departmentId', {
                 departmentId: req.params.id,
             })
