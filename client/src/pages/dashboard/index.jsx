@@ -23,13 +23,13 @@ const Two = styled.div`
 
 const Dashboard = () => {
     const groupGender = useGroupWithLength({
-        api: '/department/groupgender',
+        api: '/department/group/gender',
     });
     const groupWorkingType = useGroupWithLength({
-        api: '/department/groupworkingtype',
+        api: '/department/group/workingtype',
     });
     const groupHiring = useGroupWithTotal({
-        api: '/person/grouphiring',
+        api: '/person/group/hiring',
     });
 
     return (
