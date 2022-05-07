@@ -1,7 +1,7 @@
-import express from 'express';
+import express, { Router } from 'express';
 import { personControllers } from '../controllers/personControllers';
 
-const router = express.Router();
+const router: Router = express.Router();
 
 router.post('/', personControllers.createNewPerson);
 router.put('/:personId/account/:accountId', personControllers.connectToAccount);

@@ -61,5 +61,28 @@ exports.ethnicityControllers = {
             });
         }
     },
+    getAllPersons: async (req, res) => {
+        try {
+            const ethnicity = await repositories_1.ethnicityRepository
+                .createQueryBuilder('ethnicity')
+                .leftJoinAndSelect('ethnicity.persons', 'persons')
+                .where('ethnicity.id = :ethnicityId', {
+                ethnicityId: req.params.id,
+            })
+                .getOne();
+            if (!ethnicity) {
+                return res.status(404).json({
+                    message: 'Ethnicity not found',
+                });
+            }
+            const { persons } = ethnicity;
+            return res.status(200).json(persons);
+        }
+        catch (error) {
+            return res.status(500).json({
+                message: error,
+            });
+        }
+    },
 };
 //# sourceMappingURL=ethnicityControllers.js.map

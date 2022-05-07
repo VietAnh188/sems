@@ -1,7 +1,7 @@
-import express from 'express';
+import express, { Router } from 'express';
 import { roleControllers } from '../controllers/roleControllers';
 
-const router = express.Router();
+const router: Router = express.Router();
 
 router.post('/', roleControllers.createNewRole);
 router.put('/:id', roleControllers.updateRole);
