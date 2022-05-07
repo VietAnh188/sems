@@ -5,4 +5,10 @@
 .box {
     border-radius: var(--primary-border-radius);
     box-shadow: var(--primary-shadow);
+    transition: transform 0.25s linear;
+
+    &:hover {
+        transform: scale(1.03);
+        cursor: pointer;
+    }
 }
