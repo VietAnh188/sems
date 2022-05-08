@@ -12,6 +12,7 @@ import Main from './Main';
 import store from './redux/store';
 import { Provider } from 'react-redux';
 import GlobalStyles from './components/GlobalStyles';
+import Profile from './pages/profile';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -31,6 +32,7 @@ root.render(
                                     path="management"
                                     element={<Management />}
                                 />
+                                <Route path="profile" element={<Profile />} />
                             </Route>
                         </Route>
                     </Routes>
