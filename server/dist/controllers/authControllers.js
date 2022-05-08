@@ -26,7 +26,7 @@ exports.authControllers = {
             if (!account)
                 return res
                     .status(400)
-                    .json({ message: 'Username does not exist' });
+                    .json({ message: 'Account does not exist' });
             if (await argon2_1.default.verify(account.password, req.body.password)) {
                 const accountRelational = await repositories_1.accountRepository
                     .createQueryBuilder('account')
