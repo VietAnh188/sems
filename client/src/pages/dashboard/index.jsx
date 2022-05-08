@@ -7,6 +7,7 @@ import GenderChart from '../../components/GenderChart';
 import EthnicityChart from '../../components/EthnicityChart';
 import WorkingTypeChart from '../../components/WorkingTypeChart';
 import { useGroupWithLength, useGroupWithTotal } from '../../hooks';
+import { Box } from '../../StyledComponents';
 
 const Row = styled.div`
     display: flex;
@@ -42,31 +43,40 @@ const Dashboard = () => {
                     style={{
                         marginRight: '10px',
                     }}
-                    className={styles.box}
                 >
-                    <SalaryChart data={groupHiring} />
+                    <Box>
+                        <SalaryChart data={groupHiring} />
+                    </Box>
                 </Two>
-                <One style={{ marginLeft: '10px' }} className={styles.box}>
-                    <BenefitChart />
+                <One style={{ marginLeft: '10px' }}>
+                    <Box>
+                        <BenefitChart />
+                    </Box>
                 </One>
             </Row>
             <Row className={styles.margin_bottom}>
-                <One className={styles.box}>
-                    <GenderChart data={groupGender} />
+                <One>
+                    <Box>
+                        <GenderChart data={groupGender} />
+                    </Box>
                 </One>
             </Row>
             <Row className={styles.margin_bottom}>
-                <One className={styles.box}>
-                    <WorkingTypeChart data={groupWorkingType} />
+                <One>
+                    <Box>
+                        <WorkingTypeChart data={groupWorkingType} />
+                    </Box>
                 </One>
             </Row>
             <Row className={styles.margin_bottom}>
-                <One className={styles.box}>
-                    <EthnicityChart data={groupEthnicity} />
+                <One>
+                    <Box>
+                        <EthnicityChart data={groupEthnicity} />
+                    </Box>
                 </One>
             </Row>
             <Row>
-                <One className={styles.box}>6</One>
+                <One>6</One>
             </Row>
         </>
     );

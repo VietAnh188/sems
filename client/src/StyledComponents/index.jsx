@@ -9,3 +9,8 @@ export const Title = styled.span`
     font-weight: bold;
     margin-left: 20px;
 `;
+
+export const Box = styled.div`
+    border-radius: var(--primary-border-radius);
+    box-shadow: var(--primary-shadow);
+`;
