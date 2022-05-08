@@ -107,7 +107,7 @@ const Profile = () => {
                         </Department>
                     </div>
                     <div className={styles.profile_top_info}>
-                        <Role>{roles ? roles[0].name : 'No Role'}</Role>
+                        <Role>{roles ? roles[0]?.name : 'No Role'}</Role>
                     </div>
                     <div className={styles.profile_top_info}>
                         <Email>{email}</Email>
