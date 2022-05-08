@@ -1,0 +1,8 @@
+.portal {
+    position: absolute;
+    display: block;
+
+    &.hide {
+        display: none;
+    }
+}

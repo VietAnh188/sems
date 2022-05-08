@@ -1,0 +1,32 @@
+.alertbox {
+    position: relative;
+    width: 20%;
+
+    &_top {
+        border-radius: var(--primary-border-radius);
+        text-align: center;
+        color: #fff;
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        padding: 5px 0;
+    }
+
+    &_bottom {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    & .closeButton {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        padding: 5px;
+        transition: transform 0.25s linear;
+
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+    }
+}
