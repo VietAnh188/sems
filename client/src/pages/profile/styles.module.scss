@@ -10,3 +10,31 @@
         margin-bottom: 20px;
     }
 }
+
+.profile_middle {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 20px;
+
+    &_item_top {
+        font-size: 15px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    &_item_bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-top: 10px;
+
+        .icon {
+            font-size: 20px;
+        }
+    }
+}
+
+.profile_bottom {
+    display: flex;
+}
