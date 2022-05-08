@@ -7,7 +7,7 @@ import GenderChart from '../../components/GenderChart';
 import EthnicityChart from '../../components/EthnicityChart';
 import WorkingTypeChart from '../../components/WorkingTypeChart';
 import { useGroupWithLength, useGroupWithTotal } from '../../hooks';
-import { Box } from '../../StyledComponents';
+import { Container, Box } from '../../StyledComponents';
 
 const Row = styled.div`
     display: flex;
@@ -37,8 +37,8 @@ const Dashboard = () => {
     });
 
     return (
-        <>
-            <Row style={{ gap: '20px' }} className={styles.margin_bottom}>
+        <Container>
+            <Row style={{ gap: '20px' }}>
                 <Two>
                     <Box>
                         <SalaryChart data={groupHiring} />
@@ -50,21 +50,21 @@ const Dashboard = () => {
                     </Box>
                 </One>
             </Row>
-            <Row className={styles.margin_bottom}>
+            <Row>
                 <One>
                     <Box>
                         <GenderChart data={groupGender} />
                     </Box>
                 </One>
             </Row>
-            <Row className={styles.margin_bottom}>
+            <Row>
                 <One>
                     <Box>
                         <WorkingTypeChart data={groupWorkingType} />
                     </Box>
                 </One>
             </Row>
-            <Row className={styles.margin_bottom}>
+            <Row>
                 <One>
                     <Box>
                         <EthnicityChart data={groupEthnicity} />
@@ -74,7 +74,7 @@ const Dashboard = () => {
             <Row>
                 <One>6</One>
             </Row>
-        </>
+        </Container>
     );
 };
 
