@@ -54,6 +54,23 @@ const Profile = () => {
         user: { id, username, email, person },
     } = useSelector(authSelector);
 
+    const {
+        id: personId,
+        first_name,
+        last_name,
+        description,
+        salary,
+        vacation,
+        gender,
+        address,
+        roles,
+        phone_number,
+        birthday,
+        hiring_date,
+        ethnicity,
+        department,
+    } = person;
+
     return (
         <Container>
             <div className={styles.profile_top}>
@@ -74,36 +91,30 @@ const Profile = () => {
                 <div style={{ flex: 3, marginLeft: '10px' }}>
                     <div className={styles.profile_top_info}>
                         <Name>
-                            {person
-                                ? `${person.first_name} ${person.last_name}`
-                                : username}
+                            {person ? `${first_name} ${last_name}` : username}
                         </Name>
                         <span
                             style={{ marginLeft: '20px', fontWeight: 'bold' }}
                         >
                             {person
-                                ? `PersonId: ${person.id}`
+                                ? `PersonId: ${personId}`
                                 : `AccountId: ${id}`}
                         </span>
                     </div>
                     <div className={styles.profile_top_info}>
                         <Department>
-                            {
-                                // update api to response department
-                            }
+                            {department?.name || 'No Department'}
                         </Department>
                     </div>
                     <div className={styles.profile_top_info}>
-                        <Role>
-                            {person.roles ? person.roles[0].name : 'No Role'}
-                        </Role>
+                        <Role>{roles ? roles[0].name : 'No Role'}</Role>
                     </div>
                     <div className={styles.profile_top_info}>
                         <Email>{email}</Email>
                     </div>
                     <div className={styles.profile_top_info}>
                         <Description>
-                            {person.description || 'No Description'}
+                            {description || 'No Description'}
                         </Description>
                     </div>
                 </div>
@@ -117,7 +128,7 @@ const Profile = () => {
                                 <span>Total salary</span>
                             </div>
                             <div className={styles.profile_middle_item_bottom}>
-                                {person ? person.salary : 'No Salary'}
+                                {salary || 'No Salary'}
                             </div>
                         </Wrapper>
                     </Box>
@@ -130,9 +141,7 @@ const Profile = () => {
                             </div>
                             <div className={styles.profile_middle_item_bottom}>
                                 <FaUmbrellaBeach className={styles.icon} />
-                                {person
-                                    ? `${person.vacation} / 10`
-                                    : 'No Vacation'}
+                                {vacation ? `${vacation} / 10` : 'No Vacation'}
                             </div>
                         </Wrapper>
                     </Box>
@@ -153,29 +162,27 @@ const Profile = () => {
                             >
                                 <DetailContainer>
                                     <Detail>Gender:</Detail>
-                                    {person.gender}
+                                    {gender}
                                 </DetailContainer>
                                 <DetailContainer>
                                     <Detail>Address:</Detail>
-                                    {person.address || 'No Address'}
+                                    {address || 'No Address'}
                                 </DetailContainer>
                                 <DetailContainer>
                                     <Detail>Ethnicity:</Detail>
-                                    {
-                                        // create new api to response ethnicity
-                                    }
+                                    {ethnicity?.name || 'No Ethnicity'}
                                 </DetailContainer>
                                 <DetailContainer>
                                     <Detail>Phone number:</Detail>
-                                    {person.phone_number || 'No Phone Number'}
+                                    {phone_number || 'No Phone Number'}
                                 </DetailContainer>
                                 <DetailContainer>
                                     <Detail>Birthday:</Detail>
-                                    {person.birthday || 'No Birthday'}
+                                    {birthday || 'No Birthday'}
                                 </DetailContainer>
                                 <DetailContainer>
                                     <Detail>Hiring date:</Detail>
-                                    {person.hiring_date || 'No Hiring Date'}
+                                    {hiring_date || 'No Hiring Date'}
                                 </DetailContainer>
                             </Wrapper>
                         </Box>
