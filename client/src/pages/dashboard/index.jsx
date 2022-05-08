@@ -38,17 +38,13 @@ const Dashboard = () => {
 
     return (
         <>
-            <Row className={styles.margin_bottom}>
-                <Two
-                    style={{
-                        marginRight: '10px',
-                    }}
-                >
+            <Row style={{ gap: '20px' }} className={styles.margin_bottom}>
+                <Two>
                     <Box>
                         <SalaryChart data={groupHiring} />
                     </Box>
                 </Two>
-                <One style={{ marginLeft: '10px' }}>
+                <One>
                     <Box>
                         <BenefitChart />
                     </Box>
