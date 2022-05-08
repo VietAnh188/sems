@@ -17,7 +17,7 @@ function App() {
         if (!user) {
             navigate('/login');
         } else {
-            navigate('/main');
+            navigate('/main/profile');
         }
     }, [user?.id]);
 
