@@ -13,7 +13,7 @@ function App() {
         if (!user) {
             navigate('/login');
         } else {
-            navigate('/main/profile');
+            navigate('/main/dashboard');
         }
     }, [user?.id]);
 
