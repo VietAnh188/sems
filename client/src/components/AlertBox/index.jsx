@@ -19,7 +19,7 @@ const AlertBox = ({ category, handleCloseAlert }) => {
                                 : ''
                         }`,
                     }}
-                    className={styles.alertbox_top}
+                    className={styles.alert_box_top}
                 >
                     {category.type === 'failure'
                         ? 'Login Failed'
@@ -35,12 +35,45 @@ const AlertBox = ({ category, handleCloseAlert }) => {
                                 : 'var(--success-color)'
                         }`,
                     }}
-                    className={styles.alertbox_bottom}
+                    className={styles.alert_box_bottom}
                 >
                     {category.type === 'failure'
                         ? 'Username or Password is incorrect'
                         : category.type === 'success'
                         ? 'Your are welcome'
+                        : ''}
+                </div>
+            </>
+        );
+    }
+
+    if (category.action === 'notification') {
+        content = (
+            <>
+                <div
+                    style={{
+                        backgroundColor: `${
+                            category.type === 'logout'
+                                ? 'var(--warning-color)'
+                                : ''
+                        }`,
+                    }}
+                    className={styles.alert_box_top}
+                >
+                    {category.type === 'logout' ? "Let's Logout" : ''}
+                </div>
+                <div
+                    style={{
+                        color: `${
+                            category.type === 'logout'
+                                ? 'var(--warning-color)'
+                                : ''
+                        }`,
+                    }}
+                    className={styles.alert_box_bottom}
+                >
+                    {category.type === 'logout'
+                        ? 'Please Logout to update your new information'
                         : ''}
                 </div>
             </>
