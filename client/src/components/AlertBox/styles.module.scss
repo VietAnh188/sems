@@ -1,6 +1,11 @@
 .alertbox {
     position: relative;
     width: 20%;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    border-radius: var(--primary-border-radius);
 
     &_top {
         border-radius: var(--primary-border-radius);

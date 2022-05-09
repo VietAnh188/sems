@@ -3,7 +3,7 @@ import styles from './styles.module.scss';
 import { Box, Wrapper } from '../../StyledComponents';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
-const AlertBox = ({ category }) => {
+const AlertBox = ({ category, handleCloseAlert }) => {
     let content;
 
     if (category.action === 'auth') {
@@ -52,7 +52,10 @@ const AlertBox = ({ category }) => {
             <Box>
                 <Wrapper>{content}</Wrapper>
             </Box>
-            <span className={styles.closeButton}>
+            <span
+                className={styles.closeButton}
+                onClick={() => handleCloseAlert(false)}
+            >
                 <AiOutlineCloseCircle style={{ fontSize: '15px' }} />
             </span>
         </div>

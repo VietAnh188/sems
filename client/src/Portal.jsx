@@ -7,6 +7,8 @@ let portalRoot = document.getElementById('portal-root');
 if (!portalRoot) {
     const portalRootDiv = document.createElement('div');
     portalRootDiv.id = 'portal-root';
+    portalRootDiv.style.display = 'grid';
+    portalRootDiv.style.placeItems = 'center';
     document.body.appendChild(portalRootDiv);
     portalRoot = portalRootDiv;
 }
