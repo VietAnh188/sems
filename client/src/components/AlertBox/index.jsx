@@ -48,7 +48,7 @@ const AlertBox = ({ category, handleCloseAlert }) => {
     }
 
     return (
-        <div className={styles.alertbox}>
+        <div className={styles.alert_box}>
             <Box>
                 <Wrapper>{content}</Wrapper>
             </Box>
