@@ -70,6 +70,12 @@ exports.personControllers = {
     updatePerson: async (req, res) => {
         try {
             const { id } = req.params;
+            const person = await repositories_1.personRepository.findOneBy({ id });
+            if (!person) {
+                return res.status(404).json({
+                    message: 'Person not found',
+                });
+            }
             await repositories_1.personRepository.update(id, req.body);
             return res.status(200).json({
                 message: 'Update success',
