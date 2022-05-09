@@ -1,4 +1,10 @@
-import React, { useState, useTransition, useId, useRef } from 'react';
+import React, {
+    useState,
+    useTransition,
+    useId,
+    useRef,
+    useContext,
+} from 'react';
 import styles from './styles.module.scss';
 import styled from 'styled-components';
 import { Box, Wrapper } from '../../StyledComponents';
@@ -7,6 +13,8 @@ import Button from '../Button';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { authSelector } from '../../redux/features/auth';
+import { ToggleContext } from '../../contexts/toggle/toggleContext';
+import { toggleOpenAction } from '../../contexts/toggle/toggleActions';
 
 const Detail = styled.div`
     display: flex;
@@ -28,6 +36,8 @@ const EditProfileBox = ({ handleOpen }) => {
             person: { id: currentPersonId },
         },
     } = useSelector(authSelector);
+
+    const { dispatch: toggleDispatch } = useContext(ToggleContext);
 
     const firstName = useRef();
     const lastName = useRef();
@@ -73,6 +83,7 @@ const EditProfileBox = ({ handleOpen }) => {
             };
             await axios.put(`/person/${currentPersonId}`, request);
             handleOpen(false);
+            toggleDispatch(toggleOpenAction());
         } catch (error) {
             console.log(error);
         }

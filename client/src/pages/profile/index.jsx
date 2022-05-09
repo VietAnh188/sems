@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './styles.module.scss';
 import styled from 'styled-components';
 import { Container, Wrapper, Box } from '../../StyledComponents';
@@ -10,6 +10,9 @@ import { FaUmbrellaBeach } from 'react-icons/fa';
 import Portal from '../../Portal';
 import EditProfileBox from '../../components/EditProfileBox';
 import { useToggle } from '../../hooks';
+import { ToggleContext } from '../../contexts/toggle/toggleContext';
+import AlertBox from '../../components/AlertBox';
+import { toggleCloseAction } from '../../contexts/toggle/toggleActions';
 
 const Name = styled.span`
     font-size: 20px;
@@ -58,6 +61,8 @@ const Profile = () => {
         user: { id, username, email, person },
     } = useSelector(authSelector);
 
+    const { isToggled, dispatch: toggleDispatch } = useContext(ToggleContext);
+
     const [isOpenEditBox, handleIsOpenBox] = useToggle(false);
 
     const {
@@ -76,6 +81,10 @@ const Profile = () => {
         ethnicity,
         department,
     } = person;
+
+    const handleCloseAlert = () => {
+        toggleDispatch(toggleCloseAction());
+    };
 
     return (
         <>
@@ -220,6 +229,12 @@ const Profile = () => {
             </Container>
             <Portal visible={isOpenEditBox}>
                 <EditProfileBox handleOpen={handleIsOpenBox} />
+            </Portal>
+            <Portal visible={isToggled}>
+                <AlertBox
+                    category={{ action: 'notification', type: 'logout' }}
+                    handleCloseAlert={handleCloseAlert}
+                />
             </Portal>
         </>
     );
