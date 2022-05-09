@@ -29,7 +29,7 @@ const LeftBar = () => {
     const {
         user: {
             username,
-            person: { first_name, last_name, roles },
+            person: { id, first_name, last_name, roles },
         },
     } = useSelector(authSelector);
 
@@ -53,7 +53,7 @@ const LeftBar = () => {
                 </div>
                 <div className={styles.leftbar_wrapper_feature}>
                     <ul>
-                        <Link to="profile" className={styles.link}>
+                        <Link to={`profile/${id}`} className={styles.link}>
                             <li>
                                 <CgProfile className={styles.icon} />
                                 Profile

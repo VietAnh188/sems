@@ -32,7 +32,9 @@ root.render(
                                     path="management"
                                     element={<Management />}
                                 />
-                                <Route path="profile" element={<Profile />} />
+                                <Route path="profile">
+                                    <Route path=":id" element={<Profile />} />
+                                </Route>
                             </Route>
                         </Route>
                     </Routes>
