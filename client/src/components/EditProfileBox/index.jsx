@@ -1,9 +1,12 @@
-import React, { useState, useTransition, useId } from 'react';
+import React, { useState, useTransition, useId, useRef } from 'react';
 import styles from './styles.module.scss';
 import styled from 'styled-components';
 import { Box, Wrapper } from '../../StyledComponents';
 import RadioCheck from '../RadioCheck';
 import Button from '../Button';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { authSelector } from '../../redux/features/auth';
 
 const Detail = styled.div`
     display: flex;
@@ -17,8 +20,21 @@ const Label = styled.label`
     flex: 1;
 `;
 
-const EditProfileBox = () => {
+const EditProfileBox = ({ handleOpen }) => {
     const id = useId();
+
+    const {
+        user: {
+            person: { id: currentPersonId },
+        },
+    } = useSelector(authSelector);
+
+    const firstName = useRef();
+    const lastName = useRef();
+    const descripton = useRef();
+    const address = useRef();
+    const phoneNumber = useRef();
+    const birthday = useRef();
 
     const [isPending, startTransition] = useTransition();
 
@@ -30,6 +46,40 @@ const EditProfileBox = () => {
         startTransition(() => {
             setSelectedGender(event.target.value);
         });
+    };
+
+    const handleSave = async () => {
+        try {
+            const request = {
+                ...(firstName.current.value && {
+                    first_name: firstName.current.value,
+                }),
+                ...(lastName.current.value && {
+                    last_name: lastName.current.value,
+                }),
+                ...(descripton.current.value && {
+                    description: descripton.current.value,
+                }),
+                ...(address.current.value && {
+                    address: address.current.value,
+                }),
+                ...(phoneNumber.current.value && {
+                    phone_number: phoneNumber.current.value,
+                }),
+                ...(birthday.current.value && {
+                    birthday: birthday.current.value,
+                }),
+                ...(selectedGender && { gender: selectedGender }),
+            };
+            await axios.put(`/person/${currentPersonId}`, request);
+            handleOpen(false);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleExit = () => {
+        handleOpen(false);
     };
 
     return (
@@ -70,6 +120,7 @@ const EditProfileBox = () => {
                                 First name:
                             </Label>
                             <input
+                                ref={firstName}
                                 style={{ flex: 2 }}
                                 type="text"
                                 placeholder="enter your first name"
@@ -79,18 +130,19 @@ const EditProfileBox = () => {
                         <Detail>
                             <Label htmlFor={id + '-lastname'}>Last name:</Label>
                             <input
+                                ref={lastName}
                                 style={{ flex: 2 }}
                                 type="text"
                                 placeholder="enter your last name"
                                 id={id + '-lastname'}
                             />
                         </Detail>
-
                         <Detail>
                             <Label htmlFor={id + '-description'}>
                                 Description:
                             </Label>
                             <textarea
+                                ref={descripton}
                                 style={{ flex: 2 }}
                                 name="description"
                                 id={id + '-description'}
@@ -101,6 +153,7 @@ const EditProfileBox = () => {
                         <Detail>
                             <Label htmlFor={id + '-address'}>Address:</Label>
                             <input
+                                ref={address}
                                 type="text"
                                 placeholder="enter your address"
                                 style={{ flex: 2 }}
@@ -111,6 +164,7 @@ const EditProfileBox = () => {
                                 Phone number:
                             </Label>
                             <input
+                                ref={phoneNumber}
                                 type="text"
                                 placeholder="123-456-7890"
                                 style={{ flex: 2 }}
@@ -120,6 +174,7 @@ const EditProfileBox = () => {
                         <Detail>
                             <Label htmlFor={id + '-birthday'}>Birthday:</Label>
                             <input
+                                ref={birthday}
                                 style={{ flex: 2 }}
                                 type="date"
                                 name="birthday"
@@ -134,8 +189,12 @@ const EditProfileBox = () => {
                             justifyContent: 'space-evenly',
                         }}
                     >
-                        <Button name="Save" />
-                        <Button name="Exit" />
+                        <div onClick={handleSave}>
+                            <Button name="Save" onClick />
+                        </div>
+                        <div onClick={handleExit}>
+                            <Button name="Exit" />
+                        </div>
                     </div>
                 </Wrapper>
             </Box>

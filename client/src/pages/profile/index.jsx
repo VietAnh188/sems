@@ -9,6 +9,7 @@ import { authSelector } from '../../redux/features/auth';
 import { FaUmbrellaBeach } from 'react-icons/fa';
 import Portal from '../../Portal';
 import EditProfileBox from '../../components/EditProfileBox';
+import { useToggle } from '../../hooks';
 
 const Name = styled.span`
     font-size: 20px;
@@ -56,6 +57,8 @@ const Profile = () => {
     const {
         user: { id, username, email, person },
     } = useSelector(authSelector);
+
+    const [isOpenEditBox, handleIsOpenBox] = useToggle(false);
 
     const {
         id: personId,
@@ -210,11 +213,13 @@ const Profile = () => {
                     </div>
                 )}
                 <div className={styles.profile_edit}>
-                    <Button name={'Edit Profile'}>Edit Profile</Button>
+                    <div onClick={() => handleIsOpenBox(true)}>
+                        <Button name={'Edit Profile'}>Edit Profile</Button>
+                    </div>
                 </div>
             </Container>
-            <Portal visible={true}>
-                <EditProfileBox />
+            <Portal visible={isOpenEditBox}>
+                <EditProfileBox handleOpen={handleIsOpenBox} />
             </Portal>
         </>
     );
