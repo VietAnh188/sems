@@ -1,0 +1,9 @@
+.radio_check {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+
+    & input {
+        margin: 0;
+    }
+}
