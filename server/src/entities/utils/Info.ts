@@ -42,7 +42,7 @@ export class Info extends BaseEntity {
 
     @Column({
         nullable: true,
-        length: 10,
+        length: 13,
     })
     phone_number: string;
 

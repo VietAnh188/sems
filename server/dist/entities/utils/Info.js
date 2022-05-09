@@ -52,7 +52,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({
         nullable: true,
-        length: 10,
+        length: 13,
     }),
     __metadata("design:type", String)
 ], Info.prototype, "phone_number", void 0);
