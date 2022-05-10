@@ -100,7 +100,11 @@ const Login = () => {
             <Portal visible={visible}>
                 {visible && (
                     <AlertBox
-                        category={{ action: 'auth', type: 'failure' }}
+                        color="--error-color"
+                        content={{
+                            title: 'Login Failed',
+                            message: 'Username or Password is incorrect',
+                        }}
                         handleCloseAlert={handleCloseAlert}
                     />
                 )}

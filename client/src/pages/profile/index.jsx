@@ -232,7 +232,11 @@ const Profile = () => {
             </Portal>
             <Portal visible={isToggled}>
                 <AlertBox
-                    category={{ action: 'notification', type: 'logout' }}
+                    color="--warning-color"
+                    content={{
+                        title: 'Lets Logout',
+                        message: 'Please logout to update your new information',
+                    }}
                     handleCloseAlert={handleCloseAlert}
                 />
             </Portal>
