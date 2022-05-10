@@ -23,20 +23,10 @@ const Login = () => {
 
     const [visible, handleCloseAlert] = useToggle(isError);
 
-    // const [visible, setVisible] = useState(isError);
-
     const username = useRef();
     const password = useRef();
 
     const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     setVisible(isError);
-    // }, [isError]);
-
-    // const handleCloseAlert = () => {
-    //     setVisible(false);
-    // };
 
     const handleLogin = event => {
         event.preventDefault();
