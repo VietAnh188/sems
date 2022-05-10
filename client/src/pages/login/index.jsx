@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useId, useRef } from 'react';
+import React, { useId, useRef } from 'react';
 import styled from 'styled-components';
 import styles from './styles.module.scss';
 import Button from '../../components/Button';
