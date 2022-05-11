@@ -1,0 +1,1 @@
+{"version":3,"file":"GetPerson.js","sourceRoot":"","sources":["../../src/middlewares/GetPerson.ts"],"names":[],"mappings":";;AAEA,MAAM,SAAS,GAAG,CAAC,GAAY,EAAE,IAAc,EAAE,IAAkB,EAAE,EAAE;IACnE,OAAO,CAAC,GAAG,CAAC,GAAG,CAAC,IAAI,CAAC,CAAC;IACtB,IAAI,EAAE,CAAC;AACX,CAAC,CAAC;AAEF,kBAAe,SAAS,CAAC"}

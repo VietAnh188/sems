@@ -1,0 +1,1 @@
+{"version":3,"file":"CanDelete.js","sourceRoot":"","sources":["../../src/permissions/CanDelete.ts"],"names":[],"mappings":";;AAEA,MAAM,gBAAgB,GAAG,CAAC,MAAyB,EAAW,EAAE;IAC5D,OAAO,MAAM,CAAC,KAAK,CAAC,IAAI,CAAC,IAAI,CAAC,EAAE,CAAC,IAAI,CAAC,IAAI,KAAK,SAAS,CAAC,CAAC;AAC9D,CAAC,CAAC;AAEF,kBAAe,gBAAgB,CAAC"}
