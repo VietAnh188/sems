@@ -1,5 +1,6 @@
 import express, { Router } from 'express';
 import { personControllers } from '../controllers/personControllers';
+import { authGetPerson } from '../middlewares';
 
 const router: Router = express.Router();
 
@@ -17,7 +18,7 @@ router.put('/:personId/role/:roleId', personControllers.connectToRoles);
 router.get('/group/hiring', personControllers.getAllAndGroupHiring);
 router.put('/:id', personControllers.updatePerson);
 router.get('/search', personControllers.getSomePersons);
-router.get('/:id', personControllers.getOnePerson);
+router.get('/:id', authGetPerson, personControllers.getOnePerson);
 router.get('/', personControllers.getAllPersons);
 
 export { router as PersonRouter };

@@ -1,0 +1,1 @@
+{"version":3,"file":"CanViewPerson.js","sourceRoot":"","sources":["../../src/permissions/CanViewPerson.ts"],"names":[],"mappings":";;;;;AACA,0EAAkD;AAElD,MAAM,aAAa,GAAG,CAClB,MAAqC,EACrC,QAAgB,EACT,EAAE;IACT,OAAO,IAAA,0BAAgB,EAAC,EAAE,KAAK,EAAE,MAAM,CAAC,KAAK,EAAE,CAAC,IAAI,MAAM,CAAC,EAAE,KAAK,QAAQ,CAAC;AAC/E,CAAC,CAAC;AAEF,kBAAe,aAAa,CAAC"}

@@ -1,3 +1,4 @@
 import authDeleteRecord from './authDeleteRecord';
+import authGetPerson from './authGetPerson';
 
-export { authDeleteRecord };
+export { authDeleteRecord, authGetPerson };

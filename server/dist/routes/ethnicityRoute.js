@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EthnicityRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const ethnicityControllers_1 = require("../controllers/ethnicityControllers");
+const middlewares_1 = require("../middlewares");
 const router = express_1.default.Router();
 exports.EthnicityRouter = router;
 router.get('/all/persons', ethnicityControllers_1.ethnicityControllers.getAllPersonsInAllEthnicity);
@@ -13,5 +14,5 @@ router.get('/:id/persons', ethnicityControllers_1.ethnicityControllers.getAllPer
 router.get('/', ethnicityControllers_1.ethnicityControllers.getAllEthnicity);
 router.post('/', ethnicityControllers_1.ethnicityControllers.createNewEthnicity);
 router.put('/:id', ethnicityControllers_1.ethnicityControllers.updateEthnicity);
-router.delete('/:id', ethnicityControllers_1.ethnicityControllers.deleteEthnicity);
+router.delete('/:id', middlewares_1.authDeleteRecord, ethnicityControllers_1.ethnicityControllers.deleteEthnicity);
 //# sourceMappingURL=ethnicityRoute.js.map
