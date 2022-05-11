@@ -1,6 +1,6 @@
 import express, { Router } from 'express';
 import { departmentControllers } from '../controllers/departmentControllers';
-import { authDeleteRecord } from '../middlewares';
+import { authDeleteRecord, authGetAllRecord } from '../middlewares';
 
 const router: Router = express.Router();
 
@@ -14,6 +14,6 @@ router.get(
 );
 router.get('/:id/persons', departmentControllers.getAllPersons);
 router.get('/:id', departmentControllers.getOneDepartment);
-router.get('/', departmentControllers.getAllDepartment);
+router.get('/', authGetAllRecord, departmentControllers.getAllDepartment);
 
 export { router as DepartmentRouter };

@@ -16,5 +16,5 @@ router.get('/group/gender', departmentControllers_1.departmentControllers.getAll
 router.get('/group/workingtype', departmentControllers_1.departmentControllers.getAllAndGroupWorkingTypePerson);
 router.get('/:id/persons', departmentControllers_1.departmentControllers.getAllPersons);
 router.get('/:id', departmentControllers_1.departmentControllers.getOneDepartment);
-router.get('/', departmentControllers_1.departmentControllers.getAllDepartment);
+router.get('/', middlewares_1.authGetAllRecord, departmentControllers_1.departmentControllers.getAllDepartment);
 //# sourceMappingURL=departmentRoute.js.map

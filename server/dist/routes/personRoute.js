@@ -18,5 +18,5 @@ router.get('/group/hiring', personControllers_1.personControllers.getAllAndGroup
 router.put('/:id', personControllers_1.personControllers.updatePerson);
 router.get('/search', personControllers_1.personControllers.getSomePersons);
 router.get('/:id', middlewares_1.authGetPerson, personControllers_1.personControllers.getOnePerson);
-router.get('/', personControllers_1.personControllers.getAllPersons);
+router.get('/', middlewares_1.authGetAllRecord, personControllers_1.personControllers.getAllPersons);
 //# sourceMappingURL=personRoute.js.map
