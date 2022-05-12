@@ -10,9 +10,9 @@ const middlewares_1 = require("../middlewares");
 const router = express_1.default.Router();
 exports.EthnicityRouter = router;
 router.get('/all/persons', ethnicityControllers_1.ethnicityControllers.getAllPersonsInAllEthnicity);
-router.get('/:id/persons', ethnicityControllers_1.ethnicityControllers.getAllPersons);
-router.get('/', middlewares_1.authGetAllRecord, ethnicityControllers_1.ethnicityControllers.getAllEthnicity);
-router.post('/', ethnicityControllers_1.ethnicityControllers.createNewEthnicity);
-router.put('/:id', ethnicityControllers_1.ethnicityControllers.updateEthnicity);
-router.delete('/:id', middlewares_1.authDeleteRecord, ethnicityControllers_1.ethnicityControllers.deleteEthnicity);
+router.get('/:id/persons', middlewares_1.authManager, ethnicityControllers_1.ethnicityControllers.getAllPersons);
+router.get('/', middlewares_1.authManager, ethnicityControllers_1.ethnicityControllers.getAllEthnicity);
+router.post('/', middlewares_1.authManager, ethnicityControllers_1.ethnicityControllers.createNewEthnicity);
+router.put('/:id', middlewares_1.authManager, ethnicityControllers_1.ethnicityControllers.updateEthnicity);
+router.delete('/:id', middlewares_1.authManager, ethnicityControllers_1.ethnicityControllers.deleteEthnicity);
 //# sourceMappingURL=ethnicityRoute.js.map
