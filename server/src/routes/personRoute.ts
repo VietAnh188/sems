@@ -1,6 +1,10 @@
 import express, { Router } from 'express';
 import { personControllers } from '../controllers/personControllers';
-import { authGetPerson, authGetAllRecord } from '../middlewares';
+import {
+    authGetPerson,
+    authGetAllRecord,
+    authUpdatePerson,
+} from '../middlewares';
 
 const router: Router = express.Router();
 
@@ -16,7 +20,7 @@ router.put(
 );
 router.put('/:personId/role/:roleId', personControllers.connectToRoles);
 router.get('/group/hiring', personControllers.getAllAndGroupHiring);
-router.put('/:id', personControllers.updatePerson);
+router.put('/:id', authUpdatePerson, personControllers.updatePerson);
 router.get('/search', personControllers.getSomePersons);
 router.get('/:id', authGetPerson, personControllers.getOnePerson);
 router.get('/', authGetAllRecord, personControllers.getAllPersons);

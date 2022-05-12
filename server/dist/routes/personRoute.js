@@ -15,7 +15,7 @@ router.put('/:personId/department/:departmentId', personControllers_1.personCont
 router.put('/:personId/ethnicity/:ethnicityId', personControllers_1.personControllers.connectToEthnicity);
 router.put('/:personId/role/:roleId', personControllers_1.personControllers.connectToRoles);
 router.get('/group/hiring', personControllers_1.personControllers.getAllAndGroupHiring);
-router.put('/:id', personControllers_1.personControllers.updatePerson);
+router.put('/:id', middlewares_1.authUpdatePerson, personControllers_1.personControllers.updatePerson);
 router.get('/search', personControllers_1.personControllers.getSomePersons);
 router.get('/:id', middlewares_1.authGetPerson, personControllers_1.personControllers.getOnePerson);
 router.get('/', middlewares_1.authGetAllRecord, personControllers_1.personControllers.getAllPersons);
