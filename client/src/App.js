@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { authSelector } from './redux/features/auth';
-import Portal from './Portal';
 
 function App() {
     const { user } = useSelector(authSelector);

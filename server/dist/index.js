@@ -21,7 +21,12 @@ data_source_1.AppDataSource.initialize()
     .then(() => {
     const app = (0, express_1.default)();
     const server = (0, http_1.createServer)(app);
-    const io = new socket_io_1.Server(server);
+    const io = new socket_io_1.Server(server, {
+        cors: {
+            origin: 'http://localhost:3000',
+            credentials: true,
+        },
+    });
     app.get('/', (_, res) => {
         res.send('Hello World!');
     });
@@ -34,8 +39,8 @@ data_source_1.AppDataSource.initialize()
     app.use('/api/person', personRoute_1.PersonRouter);
     app.use('/api/department', departmentRoute_1.DepartmentRouter);
     app.use('/api/ethnicity', ethnicityRoute_1.EthnicityRouter);
-    io.on('connection', _socket => {
-        console.log('connected');
+    io.on('connection', socket => {
+        console.log('Socket ID: ' + socket.id);
     });
     const port = process.env.PORT || 1808;
     server.listen(port, () => {
