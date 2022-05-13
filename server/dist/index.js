@@ -5,6 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
 require("reflect-metadata");
+const http_1 = require("http");
+const socket_io_1 = require("socket.io");
 const morgan_1 = __importDefault(require("morgan"));
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
@@ -18,6 +20,8 @@ const ethnicityRoute_1 = require("./routes/ethnicityRoute");
 data_source_1.AppDataSource.initialize()
     .then(() => {
     const app = (0, express_1.default)();
+    const server = (0, http_1.createServer)(app);
+    const io = new socket_io_1.Server(server);
     app.get('/', (_, res) => {
         res.send('Hello World!');
     });
@@ -30,8 +34,11 @@ data_source_1.AppDataSource.initialize()
     app.use('/api/person', personRoute_1.PersonRouter);
     app.use('/api/department', departmentRoute_1.DepartmentRouter);
     app.use('/api/ethnicity', ethnicityRoute_1.EthnicityRouter);
+    io.on('connection', _socket => {
+        console.log('connected');
+    });
     const port = process.env.PORT || 1808;
-    app.listen(port, () => {
+    server.listen(port, () => {
         console.log(`Listening on port ${port}`);
     });
 })

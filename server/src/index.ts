@@ -1,5 +1,7 @@
 require('dotenv').config();
 import 'reflect-metadata';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
 import morgan from 'morgan';
 import express, { Express } from 'express';
 import cors from 'cors';
@@ -14,6 +16,8 @@ import { EthnicityRouter } from './routes/ethnicityRoute';
 AppDataSource.initialize()
     .then(() => {
         const app: Express = express();
+        const server = createServer(app);
+        const io = new Server(server);
 
         app.get('/', (_, res) => {
             res.send('Hello World!');
@@ -34,9 +38,13 @@ AppDataSource.initialize()
         app.use('/api/department', DepartmentRouter);
         app.use('/api/ethnicity', EthnicityRouter);
 
+        io.on('connection', _socket => {
+            console.log('connected');
+        });
+
         const port = process.env.PORT || 1808;
 
-        app.listen(port, () => {
+        server.listen(port, () => {
             console.log(`Listening on port ${port}`);
         });
     })
